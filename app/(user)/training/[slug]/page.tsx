@@ -81,8 +81,7 @@ export default async function TrainingPage({ params }: TrainingPageProps) {
               <h2 className="text-2xl font-bold mb-4">Training Content</h2>
               <div className="space-y-4">
                 {
-                  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                  // @ts-expect-error
+                  // @ts-ignore
                   training.modules?.map((module, index) => (
                   <div
                     key={module._id}
@@ -95,8 +94,7 @@ export default async function TrainingPage({ params }: TrainingPageProps) {
                     </div>
                     <div className="divide-y divide-border">
                       {
-                        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                        // @ts-expect-error
+                        // @ts-ignore
                         module.lessons?.map((lesson, lessonIndex) => (
                         <div
                           key={lesson._id}

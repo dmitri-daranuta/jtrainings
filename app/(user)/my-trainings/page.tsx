@@ -16,8 +16,7 @@ export default async function MyTrainingsPage() {
   const enrolledTrainings = await getEnrolledTrainings(user.id);
 
   // Get progress for each enrolled training.
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-expect-error
+  // @ts-ignore
   const trainingsWithProgress = await Promise.all(
     enrolledTrainings.map(async ({ training }) => {
       if (!training) return null;
