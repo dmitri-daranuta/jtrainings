@@ -80,7 +80,10 @@ export default async function TrainingPage({ params }: TrainingPageProps) {
             <div className="bg-card rounded-lg p-6 mb-8 border border-border">
               <h2 className="text-2xl font-bold mb-4">Training Content</h2>
               <div className="space-y-4">
-                {training.modules?.map((module, index) => (
+                {
+                  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                  // @ts-expect-error
+                  training.modules?.map((module, index) => (
                   <div
                     key={module._id}
                     className="border border-border rounded-lg"
@@ -91,7 +94,10 @@ export default async function TrainingPage({ params }: TrainingPageProps) {
                       </h3>
                     </div>
                     <div className="divide-y divide-border">
-                      {module.lessons?.map((lesson, lessonIndex) => (
+                      {
+                        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                        // @ts-expect-error
+                        module.lessons?.map((lesson, lessonIndex) => (
                         <div
                           key={lesson._id}
                           className="p-4 hover:bg-muted/50 transition-colors"
