@@ -5,6 +5,7 @@ import Link from "next/link";
 import { GraduationCap } from "lucide-react";
 import { getTrainingProgress } from "@/sanity/lib/lessons/getTrainingProgress";
 import { TrainingCard } from "@/components/TrainingCard";
+import { Training } from '@/sanity.types';
 
 export default async function MyTrainingsPage() {
   const user = await currentUser();
@@ -17,7 +18,7 @@ export default async function MyTrainingsPage() {
 
   // Get progress for each enrolled training.
   const trainingsWithProgress = await Promise.all(
-    enrolledTrainings.map(async ({ training }) => {
+    enrolledTrainings.map(async ({ training }: { training: Training }) => {
       if (!training) return null;
       const progress = await getTrainingProgress(user.id, training._id);
       return {
