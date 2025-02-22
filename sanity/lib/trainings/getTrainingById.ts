@@ -4,7 +4,7 @@ import { defineQuery } from "groq";
 async function getTrainingById(id: string) {
   const getTrainingByIdQuery =
     defineQuery(`*[_type == "training" && _id == $id][0] {
-      ...,  // Spread all course fields
+      ...,  // Spread all training fields
       "category": category->{...},  // Expand the category reference, including all its fields
       "instructor": instructor->{...},  // Expand the instructor reference, including all its fields
       "modules": modules[]-> {  // Expand the array of module references

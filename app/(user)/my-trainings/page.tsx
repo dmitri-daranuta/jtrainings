@@ -16,7 +16,6 @@ export default async function MyTrainingsPage() {
   const enrolledTrainings = await getEnrolledTrainings(user.id);
 
   // Get progress for each enrolled training.
-  // @ts-ignore
   const trainingsWithProgress = await Promise.all(
     enrolledTrainings.map(async ({ training }) => {
       if (!training) return null;

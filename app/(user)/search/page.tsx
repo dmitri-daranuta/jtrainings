@@ -2,8 +2,8 @@ import { Search } from 'lucide-react';
 import { searchTrainings } from '@/sanity/lib/trainings/searchTrainings';
 import { TrainingCard } from '@/components/TrainingCard';
 
-export default async function SearchPage({searchParams}: {searchParams: Promise<{ [key: string]: string | string[] | undefined }>}) {
-  const term = (await searchParams).query;
+export default async function SearchPage({searchParams}: {searchParams: Promise<{ [key: string]: string | undefined }>}) {
+  const term = (await searchParams).query ?? '';
   const decodedTerm = decodeURIComponent(term);
   const trainings = await searchTrainings(decodedTerm);
 

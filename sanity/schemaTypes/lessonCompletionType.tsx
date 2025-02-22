@@ -1,6 +1,4 @@
-import Image from "next/image";
 import { defineField, defineType } from "sanity";
-import { urlFor } from "../lib/image";
 
 export const lessonCompletionType = defineType({
   name: "lessonCompletion",
@@ -47,20 +45,13 @@ export const lessonCompletionType = defineType({
       trainingTitle: "training.title",
       lessonTitle: "lesson.title",
       completedAt: "completedAt",
-      courseImage: "training.image",
+      trainingImage: "training.image.asset",
     },
-    prepare({ trainingTitle, lessonTitle, completedAt, courseImage }) {
+    prepare({ trainingTitle, lessonTitle, completedAt, trainingImage }) {
       return {
-        title: `${trainingTitle || "Course"}: "${lessonTitle || "Lesson"}"`,
+        title: `${trainingTitle || "Training"}: "${lessonTitle || "Lesson"}"`,
         subtitle: completedAt ? new Date(completedAt).toLocaleDateString() : "",
-        media: (
-          <Image
-            src={urlFor(courseImage).url()}
-            alt={trainingTitle}
-            width={100}
-            height={100}
-          />
-        ),
+        media: trainingImage,
       };
     },
   },

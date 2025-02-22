@@ -52,7 +52,7 @@ export default async function TrainingPage({ params }: TrainingPageProps) {
             className="text-white mb-8 flex items-center hover:text-primary transition-colors w-fit"
           >
             <ArrowLeft className="mr-2 h-5 w-5" />
-            Back to Courses
+            Back to Trainings
           </Link>
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div>
@@ -80,9 +80,7 @@ export default async function TrainingPage({ params }: TrainingPageProps) {
             <div className="bg-card rounded-lg p-6 mb-8 border border-border">
               <h2 className="text-2xl font-bold mb-4">Training Content</h2>
               <div className="space-y-4">
-                {
-                  // @ts-ignore
-                  training.modules?.map((module, index) => (
+                {training.modules?.map((module, index) => (
                   <div
                     key={module._id}
                     className="border border-border rounded-lg"
@@ -93,9 +91,7 @@ export default async function TrainingPage({ params }: TrainingPageProps) {
                       </h3>
                     </div>
                     <div className="divide-y divide-border">
-                      {
-                        // @ts-ignore
-                        module.lessons?.map((lesson, lessonIndex) => (
+                      {module.lessons?.map((lesson, lessonIndex) => (
                         <div
                           key={lesson._id}
                           className="p-4 hover:bg-muted/50 transition-colors"

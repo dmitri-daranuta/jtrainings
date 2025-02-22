@@ -38,7 +38,7 @@ function EnrollButton({ trainingId, isEnrolled }: { trainingId: string; isEnroll
     );
   }
 
-  // Show enrolled state with link to course
+  // Show enrolled state with link to training
   if (isEnrolled) {
     return (
       <Link
@@ -46,7 +46,7 @@ function EnrollButton({ trainingId, isEnrolled }: { trainingId: string; isEnroll
         href={`/dashboard/training/${trainingId}`}
         className="w-full rounded-lg px-6 py-3 font-medium bg-gradient-to-r from-green-500 to-emerald-500 text-white hover:from-green-600 hover:to-emerald-600 transition-all duration-300 h-12 flex items-center justify-center gap-2 group"
       >
-        <span>Access Course</span>
+        <span>Access Training</span>
         <CheckCircle className="w-5 h-5 group-hover:scale-110 transition-transform" />
       </Link>
     );
