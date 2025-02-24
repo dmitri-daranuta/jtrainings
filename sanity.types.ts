@@ -320,6 +320,77 @@ export type Slug = {
 
 export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | LessonCompletion | Module | Lesson | Enrollment | Training | Instructor | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | Student | Category | Slug;
 export declare const internalGroqTypeReferenceTo: unique symbol;
+// Source: sanity/lib/lessons/getLessonById.ts
+// Variable: getLessonByIdQuery
+// Query: *[_type == "lesson" && _id == $id][0] {    ...,    "module": module->{      ...,      "training": training->{...}    }  }
+export type GetLessonByIdQueryResult = {
+  _id: string;
+  _type: "lesson";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title: string;
+  slug: Slug;
+  description?: string;
+  videoUrl?: string;
+  loomUrl?: string;
+  content?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  module: null;
+} | null;
+
+// Source: sanity/lib/lessons/getLessonCompletionStatus.ts
+// Variable: completionStatusQuery
+// Query: *[_type == "lessonCompletion" && student._ref == $studentId && lesson._ref == $lessonId][0] {    ...  }
+export type CompletionStatusQueryResult = {
+  _id: string;
+  _type: "lessonCompletion";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  student: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "student";
+  };
+  lesson: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "lesson";
+  };
+  module: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "module";
+  };
+  training: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "training";
+  };
+  completedAt: string;
+} | null;
+
 // Source: sanity/lib/lessons/getLessonCompletions.ts
 // Variable: getCompletionsQuery
 // Query: {    "completedLessons": *[_type == "lessonCompletion" && student._ref == $studentId && training._ref == $trainingId] {      ...,      "lesson": lesson->{...},      "module": module->{...}    },    "training": *[_type == "training" && _id == $trainingId][0] {      ...,      "modules": modules[]-> {        ...,        "lessons": lessons[]-> {...}      }    }  }
@@ -1039,6 +1110,8 @@ export type SearchQueryResult = Array<{
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
+    "*[_type == \"lesson\" && _id == $id][0] {\n    ...,\n    \"module\": module->{\n      ...,\n      \"training\": training->{...}\n    }\n  }": GetLessonByIdQueryResult;
+    "*[_type == \"lessonCompletion\" && student._ref == $studentId && lesson._ref == $lessonId][0] {\n    ...\n  }": CompletionStatusQueryResult;
     "{\n    \"completedLessons\": *[_type == \"lessonCompletion\" && student._ref == $studentId && training._ref == $trainingId] {\n      ...,\n      \"lesson\": lesson->{...},\n      \"module\": module->{...}\n    },\n    \"training\": *[_type == \"training\" && _id == $trainingId][0] {\n      ...,\n      \"modules\": modules[]-> {\n        ...,\n        \"lessons\": lessons[]-> {...}\n      }\n    }\n  }": GetCompletionsQueryResult | ProgressQueryResult;
     "*[_type == \"student\" && clerkId == $clerkId][0] {\n    \"enrolledTrainings\": *[_type == \"enrollment\" && student._ref == ^._id] {\n      ...,\n      \"training\": training-> {\n        ...,\n        \"slug\": slug.current,\n        \"category\": category->{...},\n        \"instructor\": instructor->{...}\n      }\n    }\n  }": GetEnrolledTrainingsQueryResult;
     "*[_type == \"student\" && clerkId == $clerkId][0]": GetStudentByClerkIdQueryResult;
