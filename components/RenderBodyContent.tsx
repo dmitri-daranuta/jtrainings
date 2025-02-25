@@ -16,9 +16,16 @@ import "prismjs/components/prism-css";
 import "prismjs/components/prism-json";
 import { Lesson } from '@/sanity.types';
 
+interface CodeProps {
+  value: {
+    language: string;
+    code: string;
+  };
+}
+
 const components = {
   types: {
-    code: (props) => {
+    code: (props: CodeProps) => {
       const {language, code} = props.value
       return (
         <>
