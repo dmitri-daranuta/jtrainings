@@ -45,7 +45,7 @@ export default function RenderBodyContent({lesson}: { lesson: Lesson }) {
 
   return (
     <>
-      <PortableText value={lesson.content} components={components}/>
+      <PortableText value={lesson.content ?? []} components={components}/>
     </>
   )
 }
