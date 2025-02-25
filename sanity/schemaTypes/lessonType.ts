@@ -63,7 +63,28 @@ export const lessonType = defineType({
       name: "content",
       title: "Content",
       type: "array",
-      of: [{ type: "block" }],
+      of: [
+        { type: "block" },
+        {
+          type: "code",
+          name: "code",
+          title: "Code Blocks",
+          options: {
+            languageAlternatives: [
+              { title: "", value: "" },
+              { title: "JavaScript", value: "javascript" },
+              { title: "TypeScript", value: "typescript" },
+              { title: "HTML", value: "html" },
+              { title: "CSS", value: "css" },
+              { title: "React JSX", value: "jsx" },
+              { title: "React TSX", value: "tsx" },
+              { title: "JSON", value: "json" },
+              { title: "Bash", value: "bash" },
+            ],
+            withFilename: false,
+          },
+        },
+      ],
     }),
   ],
 });

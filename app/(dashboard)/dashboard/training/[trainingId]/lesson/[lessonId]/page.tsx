@@ -5,6 +5,7 @@ import { PortableText } from "@portabletext/react";
 // import { LoomEmbed } from "@/components/LoomEmbed";
 // import { VideoPlayer } from "@/components/VideoPlayer";
 import { LessonCompleteButton } from "@/components/LessonCompleteButton";
+import RenderBodyContent from '@/components/RenderBodyContent';
 
 interface LessonPageProps {
   params: Promise<{
@@ -43,9 +44,9 @@ export default async function LessonPage({ params }: LessonPageProps) {
             {/* Lesson Content */}
             {lesson.content && (
               <div>
-                <h2 className="text-xl font-semibold mb-4">Lesson Notes</h2>
                 <div className="prose prose-blue dark:prose-invert max-w-none">
-                  <PortableText value={lesson.content} />
+                  <RenderBodyContent lesson={lesson} />
+                  {/*<PortableText value={lesson.content} />*/}
                 </div>
               </div>
             )}

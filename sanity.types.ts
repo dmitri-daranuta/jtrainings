@@ -145,7 +145,9 @@ export type Lesson = {
     level?: number;
     _type: "block";
     _key: string;
-  }>;
+  } | {
+    _key: string;
+  } & Code>;
 };
 
 export type Enrollment = {
@@ -318,7 +320,15 @@ export type Slug = {
   source?: string;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | LessonCompletion | Module | Lesson | Enrollment | Training | Instructor | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | Student | Category | Slug;
+export type Code = {
+  _type: "code";
+  language?: string;
+  filename?: string;
+  code?: string;
+  highlightedLines?: Array<number>;
+};
+
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | LessonCompletion | Module | Lesson | Enrollment | Training | Instructor | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | Student | Category | Slug | Code;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: sanity/lib/lessons/getLessonById.ts
 // Variable: getLessonByIdQuery
@@ -335,6 +345,8 @@ export type GetLessonByIdQueryResult = {
   videoUrl?: string;
   loomUrl?: string;
   content?: Array<{
+    _key: string;
+  } & Code | {
     children?: Array<{
       marks?: Array<string>;
       text?: string;
@@ -419,6 +431,8 @@ export type GetCompletionsQueryResult = {
       videoUrl?: string;
       loomUrl?: string;
       content?: Array<{
+        _key: string;
+      } & Code | {
         children?: Array<{
           marks?: Array<string>;
           text?: string;
@@ -505,6 +519,8 @@ export type GetCompletionsQueryResult = {
         videoUrl?: string;
         loomUrl?: string;
         content?: Array<{
+          _key: string;
+        } & Code | {
           children?: Array<{
             marks?: Array<string>;
             text?: string;
@@ -561,6 +577,8 @@ export type ProgressQueryResult = {
       videoUrl?: string;
       loomUrl?: string;
       content?: Array<{
+        _key: string;
+      } & Code | {
         children?: Array<{
           marks?: Array<string>;
           text?: string;
@@ -647,6 +665,8 @@ export type ProgressQueryResult = {
         videoUrl?: string;
         loomUrl?: string;
         content?: Array<{
+          _key: string;
+        } & Code | {
           children?: Array<{
             marks?: Array<string>;
             text?: string;
@@ -848,6 +868,8 @@ export type GetTrainingByIdQueryResult = {
       videoUrl?: string;
       loomUrl?: string;
       content?: Array<{
+        _key: string;
+      } & Code | {
         children?: Array<{
           marks?: Array<string>;
           text?: string;
@@ -941,6 +963,8 @@ export type GetTrainingBySlugQueryResult = {
       videoUrl?: string;
       loomUrl?: string;
       content?: Array<{
+        _key: string;
+      } & Code | {
         children?: Array<{
           marks?: Array<string>;
           text?: string;
