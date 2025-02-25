@@ -39,13 +39,18 @@ const components = {
 }
 
 export default function RenderBodyContent({lesson}: { lesson: Lesson }) {
+
   useEffect(() => {
     Prism.highlightAll();
   }, []);
 
+  if (!lesson.content) {
+    return null;
+  }
+
   return (
     <>
-      <PortableText value={lesson.content ?? []} components={components}/>
+      <PortableText value={lesson.content} components={components}/>
     </>
   )
 }
