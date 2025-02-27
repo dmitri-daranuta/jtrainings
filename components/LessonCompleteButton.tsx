@@ -3,7 +3,6 @@
 import { CheckCircle, Loader2, XCircle } from "lucide-react";
 import { Button } from "./ui/button";
 import { useState, useEffect, useTransition } from "react";
-import { useRouter } from "next/navigation";
 import { completeLessonAction } from "@/actions/completeLessonAction";
 import { uncompleteLessonAction } from "@/actions/uncompleteLessonAction";
 import { getLessonCompletionStatusAction } from "@/actions/getLessonCompletionStatusAction";
@@ -21,7 +20,6 @@ export function LessonCompleteButton({
   const [isPending, setIsPending] = useState(false);
   const [isCompleted, setIsCompleted] = useState<boolean | null>(null);
   const [isPendingTransition, startTransition] = useTransition();
-  const router = useRouter();
 
   useEffect(() => {
     startTransition(async () => {
@@ -51,8 +49,6 @@ export function LessonCompleteButton({
         );
         setIsCompleted(newStatus);
       });
-
-      router.refresh();
     } catch (error) {
       console.error("Error toggling lesson completion:", error);
     } finally {
