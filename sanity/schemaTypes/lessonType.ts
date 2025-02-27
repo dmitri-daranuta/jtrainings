@@ -1,5 +1,4 @@
 import { defineField, defineType } from "sanity";
-import ReactPlayer from 'react-player/youtube';
 
 export const lessonType = defineType({
   name: "lesson",
@@ -55,14 +54,6 @@ export const lessonType = defineType({
         {
           type: "youtube",
           title: "Video",
-          // components: {
-          //   preview: (props) => {
-          //     console.log("PPPPPPP");
-          //     console.log(props);
-          //     const { url } = props.value;
-          //     return <ReactPlayer url={url} />
-          //   },
-          // },
         }
       ],
     }),
