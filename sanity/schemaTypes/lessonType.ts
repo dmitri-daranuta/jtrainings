@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity";
+import ReactPlayer from 'react-player/youtube';
 
 export const lessonType = defineType({
   name: "lesson",
@@ -27,39 +28,6 @@ export const lessonType = defineType({
       type: "text",
     }),
     defineField({
-      name: "videoUrl",
-      title: "Video URL",
-      type: "url",
-      description: "The URL for the video player (e.g. YouTube, Vimeo)",
-    }),
-    defineField({
-      name: "loomUrl",
-      title: "Loom Share URL",
-      type: "url",
-      description:
-        "The full Loom share URL (e.g., https://www.loom.com/share/...)",
-      validation: (rule) =>
-        rule.custom((value) => {
-          if (!value) return true; // Allow empty value
-          try {
-            const url = new URL(value);
-            if (!url.hostname.endsWith("loom.com")) {
-              return "URL must be from loom.com";
-            }
-            if (!url.pathname.startsWith("/share/")) {
-              return "Must be a Loom share URL";
-            }
-            const videoId = url.pathname.split("/share/")[1];
-            if (!/^[a-f0-9-]{32,36}/.test(videoId)) {
-              return "Invalid Loom video ID in URL";
-            }
-            return true;
-          } catch {
-            return "Please enter a valid URL";
-          }
-        }),
-    }),
-    defineField({
       name: "content",
       title: "Content",
       type: "array",
@@ -68,7 +36,7 @@ export const lessonType = defineType({
         {
           type: "code",
           name: "code",
-          title: "Code Blocks",
+          title: "Code",
           options: {
             languageAlternatives: [
               { title: "", value: "" },
@@ -84,6 +52,18 @@ export const lessonType = defineType({
             withFilename: false,
           },
         },
+        {
+          type: "youtube",
+          title: "Video",
+          // components: {
+          //   preview: (props) => {
+          //     console.log("PPPPPPP");
+          //     console.log(props);
+          //     const { url } = props.value;
+          //     return <ReactPlayer url={url} />
+          //   },
+          // },
+        }
       ],
     }),
   ],
