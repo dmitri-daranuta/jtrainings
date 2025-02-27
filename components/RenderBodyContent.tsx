@@ -15,12 +15,19 @@ import "prismjs/components/prism-tsx";
 import "prismjs/components/prism-css";
 import "prismjs/components/prism-json";
 import { Lesson } from '@/sanity.types';
+import ReactPlayer from 'react-player/youtube';
 
 interface CodeProps {
   value: {
     language: string;
     code: string;
   };
+}
+
+interface YouTubeProps {
+  value: {
+    url: string
+  }
 }
 
 const components = {
@@ -34,7 +41,11 @@ const components = {
           </pre>
         </>
       )
-    }
+    },
+    youtube: (props: YouTubeProps) => {
+      const {url} = props.value
+      return <ReactPlayer url={url} />
+    },
   }
 }
 
