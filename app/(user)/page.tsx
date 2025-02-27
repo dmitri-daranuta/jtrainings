@@ -2,6 +2,9 @@ import Hero from '@/components/Hero';
 import { getTrainings } from '@/sanity/lib/trainings/getTrainings';
 import { TrainingCard } from '@/components/TrainingCard';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 3600;
+
 export default async function Home() {
   const trainings = await getTrainings();
 
