@@ -5,7 +5,7 @@ export const structure: StructureResolver = (S) =>
   S.list()
     .title('Admin Dashboard')
     .items([
-      S.listItem().title('Training Content').child(
+      S.listItem().title('Trainings').child(
         S.documentTypeList('training')
           .title('Trainings')
           .child((trainingId) =>
@@ -23,9 +23,8 @@ export const structure: StructureResolver = (S) =>
                   .child(
                     S.documentList()
                       .title('Training Enrollments')
-                      .filter(
-                        '_type == "enrollment" && training._ref == $trainingId'
-                      )
+                      .apiVersion('v2025-02-18')
+                      .filter('_type == "enrollment" && training._ref == $trainingId' )
                       .params({trainingId})
                   )
               ])
@@ -66,9 +65,8 @@ export const structure: StructureResolver = (S) =>
                             .child(
                               S.documentList()
                                 .title("Instructor's Trainings")
-                                .filter(
-                                  '_type == "training" && instructor._ref == $instructorId'
-                                )
+                                .apiVersion('v2025-02-18')
+                                .filter('_type == "training" && instructor._ref == $instructorId')
                                 .params({ instructorId })
                             ),
                         ])
@@ -99,9 +97,8 @@ export const structure: StructureResolver = (S) =>
                             .child(
                               S.documentList()
                                 .title("Student Enrollments")
-                                .filter(
-                                  '_type == "enrollment" && student._ref == $studentId'
-                                )
+                                .apiVersion('v2025-02-18')
+                                .filter('_type == "enrollment" && student._ref == $studentId')
                                 .params({ studentId })
                             ),
                           // Option to view completed lessons
@@ -110,10 +107,9 @@ export const structure: StructureResolver = (S) =>
                             .child(
                               S.documentList()
                                 .title("Completed Lessons")
+                                .apiVersion('v2025-02-18')
                                 .schemaType("lessonCompletion")
-                                .filter(
-                                  '_type == "lessonCompletion" && student._ref == $studentId'
-                                )
+                                .filter('_type == "lessonCompletion" && student._ref == $studentId')
                                 .params({ studentId })
                                 .defaultOrdering([
                                   { field: "completedAt", direction: "desc" },
