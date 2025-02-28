@@ -7,6 +7,7 @@ import { lessonType } from './lessonType';
 import { moduleType } from './moduleType';
 import { studentType } from './studentType';
 import { trainingType } from './trainingType';
+import { youtubeType } from './youtubeType';
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -17,6 +18,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     lessonType,
     moduleType,
     studentType,
-    trainingType
+    trainingType,
+    youtubeType,
   ],
 }

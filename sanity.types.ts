@@ -68,6 +68,11 @@ export type Geopoint = {
   alt?: number;
 };
 
+export type Youtube = {
+  _type: "youtube";
+  url?: string;
+};
+
 export type LessonCompletion = {
   _id: string;
   _type: "lessonCompletion";
@@ -126,8 +131,6 @@ export type Lesson = {
   title: string;
   slug: Slug;
   description?: string;
-  videoUrl?: string;
-  loomUrl?: string;
   content?: Array<{
     children?: Array<{
       marks?: Array<string>;
@@ -147,7 +150,9 @@ export type Lesson = {
     _key: string;
   } | {
     _key: string;
-  } & Code>;
+  } & Code | {
+    _key: string;
+  } & Youtube>;
 };
 
 export type Enrollment = {
@@ -328,7 +333,7 @@ export type Code = {
   highlightedLines?: Array<number>;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | LessonCompletion | Module | Lesson | Enrollment | Training | Instructor | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | Student | Category | Slug | Code;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Youtube | LessonCompletion | Module | Lesson | Enrollment | Training | Instructor | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | Student | Category | Slug | Code;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: sanity/lib/lessons/getLessonById.ts
 // Variable: getLessonByIdQuery
@@ -342,11 +347,11 @@ export type GetLessonByIdQueryResult = {
   title: string;
   slug: Slug;
   description?: string;
-  videoUrl?: string;
-  loomUrl?: string;
   content?: Array<{
     _key: string;
   } & Code | {
+    _key: string;
+  } & Youtube | {
     children?: Array<{
       marks?: Array<string>;
       text?: string;
@@ -428,11 +433,11 @@ export type GetCompletionsQueryResult = {
       title: string;
       slug: Slug;
       description?: string;
-      videoUrl?: string;
-      loomUrl?: string;
       content?: Array<{
         _key: string;
       } & Code | {
+        _key: string;
+      } & Youtube | {
         children?: Array<{
           marks?: Array<string>;
           text?: string;
@@ -516,11 +521,11 @@ export type GetCompletionsQueryResult = {
         title: string;
         slug: Slug;
         description?: string;
-        videoUrl?: string;
-        loomUrl?: string;
         content?: Array<{
           _key: string;
         } & Code | {
+          _key: string;
+        } & Youtube | {
           children?: Array<{
             marks?: Array<string>;
             text?: string;
@@ -574,11 +579,11 @@ export type ProgressQueryResult = {
       title: string;
       slug: Slug;
       description?: string;
-      videoUrl?: string;
-      loomUrl?: string;
       content?: Array<{
         _key: string;
       } & Code | {
+        _key: string;
+      } & Youtube | {
         children?: Array<{
           marks?: Array<string>;
           text?: string;
@@ -662,11 +667,11 @@ export type ProgressQueryResult = {
         title: string;
         slug: Slug;
         description?: string;
-        videoUrl?: string;
-        loomUrl?: string;
         content?: Array<{
           _key: string;
         } & Code | {
+          _key: string;
+        } & Youtube | {
           children?: Array<{
             marks?: Array<string>;
             text?: string;
@@ -865,11 +870,11 @@ export type GetTrainingByIdQueryResult = {
       title: string;
       slug: Slug;
       description?: string;
-      videoUrl?: string;
-      loomUrl?: string;
       content?: Array<{
         _key: string;
       } & Code | {
+        _key: string;
+      } & Youtube | {
         children?: Array<{
           marks?: Array<string>;
           text?: string;
@@ -960,11 +965,11 @@ export type GetTrainingBySlugQueryResult = {
       title: string;
       slug: Slug;
       description?: string;
-      videoUrl?: string;
-      loomUrl?: string;
       content?: Array<{
         _key: string;
       } & Code | {
+        _key: string;
+      } & Youtube | {
         children?: Array<{
           marks?: Array<string>;
           text?: string;
