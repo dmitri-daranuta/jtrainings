@@ -1,16 +1,16 @@
-import { currentUser } from "@clerk/nextjs/server";
-import { redirect } from "next/navigation";
-import { getEnrolledTrainings } from "@/sanity/lib/student/getEnrolledTrainings";
-import Link from "next/link";
-import { GraduationCap } from "lucide-react";
-import { getTrainingProgress } from "@/sanity/lib/lessons/getTrainingProgress";
-import { TrainingCard } from "@/components/TrainingCard";
+import { currentUser } from '@clerk/nextjs/server';
+import { redirect } from 'next/navigation';
+import { getEnrolledTrainings } from '@/sanity/lib/student/getEnrolledTrainings';
+import Link from 'next/link';
+import { GraduationCap } from 'lucide-react';
+import { getTrainingProgress } from '@/sanity/lib/lessons/getTrainingProgress';
+import { TrainingCard } from '@/components/TrainingCard';
 
 export default async function MyTrainingsPage() {
   const user = await currentUser();
 
   if (!user?.id) {
-    return redirect("/");
+    return redirect('/');
   }
 
   const enrolledTrainings = await getEnrolledTrainings(user.id);
@@ -24,7 +24,7 @@ export default async function MyTrainingsPage() {
         training,
         progress: progress.trainingProgress,
       };
-    })
+    }),
   );
 
   return (

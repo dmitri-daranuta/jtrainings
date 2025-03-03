@@ -1,27 +1,27 @@
-"use client";
+'use client';
 
-import { Progress } from "@/components/ui/progress";
-import { cn } from "@/lib/utils";
+import { Progress } from '@/components/ui/progress';
+import { cn } from '@/lib/utils';
 
 interface TrainingProgressProps {
   progress: number;
-  variant?: "default" | "success";
-  size?: "default" | "sm";
+  variant?: 'default' | 'success';
+  size?: 'default' | 'sm';
   showPercentage?: boolean;
   label?: string;
   className?: string;
 }
 
 export function TrainingProgress({
-                                 progress,
-                                 variant = "default",
-                                 size = "default",
-                                 showPercentage = true,
-                                 label,
-                                 className,
-                               }: TrainingProgressProps) {
+  progress,
+  variant = 'default',
+  size = 'default',
+  showPercentage = true,
+  label,
+  className,
+}: TrainingProgressProps) {
   return (
-    <div className={cn("space-y-2", className)}>
+    <div className={cn('space-y-2', className)}>
       <div className="flex items-center justify-between gap-2 text-sm">
         {label && <span className="text-muted-foreground">{label}</span>}
         {showPercentage && (
@@ -31,9 +31,9 @@ export function TrainingProgress({
       <Progress
         value={progress}
         className={cn(
-          "h-2 transition-all",
-          size === "sm" && "h-1",
-          variant === "success" && "[&>div]:bg-emerald-600"
+          'h-2 transition-all',
+          size === 'sm' && 'h-1',
+          variant === 'success' && '[&>div]:bg-emerald-600',
         )}
       />
     </div>

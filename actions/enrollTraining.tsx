@@ -1,9 +1,9 @@
-"use server";
+'use server';
 
-import getTrainingById from "@/sanity/lib/trainings/getTrainingById";
-import { createStudentIfNotExists } from "@/sanity/lib/student/createStudentIfNotExists";
-import { clerkClient } from "@clerk/nextjs/server";
-import { createEnrollment } from "@/sanity/lib/student/createEnrollment";
+import getTrainingById from '@/sanity/lib/trainings/getTrainingById';
+import { createStudentIfNotExists } from '@/sanity/lib/student/createStudentIfNotExists';
+import { clerkClient } from '@clerk/nextjs/server';
+import { createEnrollment } from '@/sanity/lib/student/createEnrollment';
 
 export async function enrollTraining(trainingId: string, userId: string) {
   try {
@@ -14,24 +14,24 @@ export async function enrollTraining(trainingId: string, userId: string) {
     const email = emailAddresses[0]?.emailAddress;
 
     if (!emailAddresses || !email) {
-      throw new Error("User details not found");
+      throw new Error('User details not found');
     }
 
     if (!training) {
-      throw new Error("Training not found");
+      throw new Error('Training not found');
     }
 
     // Create a user in sanity if it doesn't exist.
     const user = await createStudentIfNotExists({
       clerkId: userId,
-      email: email || "",
+      email: email || '',
       firstName: firstName || email,
-      lastName: lastName || "",
-      imageUrl: imageUrl || "",
+      lastName: lastName || '',
+      imageUrl: imageUrl || '',
     });
 
     if (!user) {
-      throw new Error("User not found");
+      throw new Error('User not found');
     }
 
     await createEnrollment({
@@ -41,7 +41,7 @@ export async function enrollTraining(trainingId: string, userId: string) {
 
     return { url: `/training/${training.slug?.current}` };
   } catch (error) {
-    console.error("Error in enrollTraining:", error);
-    throw new Error("Failed to enroll training.");
+    console.error('Error in enrollTraining:', error);
+    throw new Error('Failed to enroll training.');
   }
 }

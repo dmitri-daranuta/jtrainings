@@ -1,9 +1,9 @@
-import { defineQuery } from "groq";
-import { sanityFetch } from "../live";
+import { defineQuery } from 'groq';
+import { sanityFetch } from '../live';
 
 export async function getLessonCompletions(
   studentId: string,
-  trainingId: string
+  trainingId: string,
 ) {
   const getCompletionsQuery = defineQuery(`{
     "completedLessons": *[_type == "lessonCompletion" && student._ref == $studentId && training._ref == $trainingId] {
@@ -31,7 +31,7 @@ export async function getLessonCompletions(
   const moduleProgress = training?.modules?.map((module) => {
     const totalLessons = module.lessons?.length || 0;
     const completedInModule = completedLessons.filter(
-      (completion) => completion.module?._id === module._id
+      (completion) => completion.module?._id === module._id,
     ).length;
 
     return {
@@ -47,7 +47,7 @@ export async function getLessonCompletions(
   const totalLessons =
     training?.modules?.reduce(
       (acc, module) => acc + (module?.lessons?.length || 0),
-      0
+      0,
     ) || 0;
 
   const totalCompleted = completedLessons?.length || 0;

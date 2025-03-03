@@ -1,5 +1,5 @@
-import getTrainingById from "@/sanity/lib/trainings/getTrainingById";
-import { redirect } from "next/navigation";
+import getTrainingById from '@/sanity/lib/trainings/getTrainingById';
+import { redirect } from 'next/navigation';
 
 interface TrainingPageProps {
   params: Promise<{
@@ -12,13 +12,13 @@ export default async function TrainingPage({ params }: TrainingPageProps) {
   const training = await getTrainingById(trainingId);
 
   if (!training) {
-    return redirect("/");
+    return redirect('/');
   }
 
   // Redirect to the first lesson of the first module if available
   if (training.modules?.[0]?.lessons?.[0]?._id) {
     return redirect(
-      `/dashboard/training/${trainingId}/lesson/${training.modules[0].lessons[0]._id}`
+      `/dashboard/training/${trainingId}/lesson/${training.modules[0].lessons[0]._id}`,
     );
   }
 

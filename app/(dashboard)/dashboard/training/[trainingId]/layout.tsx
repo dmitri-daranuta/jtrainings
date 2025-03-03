@@ -1,9 +1,9 @@
-import { redirect } from "next/navigation";
-import { currentUser } from "@clerk/nextjs/server";
-import getTrainingById from "@/sanity/lib/trainings/getTrainingById";
-import { Sidebar } from "@/components/dashboard/Sidebar";
-import { getTrainingProgress } from "@/sanity/lib/lessons/getTrainingProgress";
-import { checkTrainingAccess } from "@/lib/auth";
+import { redirect } from 'next/navigation';
+import { currentUser } from '@clerk/nextjs/server';
+import getTrainingById from '@/sanity/lib/trainings/getTrainingById';
+import { Sidebar } from '@/components/dashboard/Sidebar';
+import { getTrainingProgress } from '@/sanity/lib/lessons/getTrainingProgress';
+import { checkTrainingAccess } from '@/lib/auth';
 
 interface TrainingLayoutProps {
   children: React.ReactNode;
@@ -13,14 +13,14 @@ interface TrainingLayoutProps {
 }
 
 export default async function TrainingLayout({
-                                             children,
-                                             params,
-                                           }: TrainingLayoutProps) {
+  children,
+  params,
+}: TrainingLayoutProps) {
   const user = await currentUser();
   const { trainingId } = await params;
 
   if (!user?.id) {
-    return redirect("/");
+    return redirect('/');
   }
 
   const authResult = await checkTrainingAccess(user?.id || null, trainingId);
@@ -34,12 +34,15 @@ export default async function TrainingLayout({
   ]);
 
   if (!training) {
-    return redirect("/my-trainings");
+    return redirect('/my-trainings');
   }
 
   return (
     <div className="h-full">
-      <Sidebar training={training} completedLessons={progress.completedLessons} />
+      <Sidebar
+        training={training}
+        completedLessons={progress.completedLessons}
+      />
       <main className="h-full lg:pt-[64px] pl-20 lg:pl-96">{children}</main>
     </div>
   );

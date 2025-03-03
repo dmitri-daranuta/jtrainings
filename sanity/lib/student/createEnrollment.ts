@@ -1,4 +1,4 @@
-import { client } from "../adminClient";
+import { client } from '../adminClient';
 
 interface CreateEnrollmentParams {
   studentId: string;
@@ -6,17 +6,17 @@ interface CreateEnrollmentParams {
 }
 
 export async function createEnrollment({
-                                         studentId,
-                                         trainingId,
-                                       }: CreateEnrollmentParams) {
+  studentId,
+  trainingId,
+}: CreateEnrollmentParams) {
   return client.create({
-    _type: "enrollment",
+    _type: 'enrollment',
     student: {
-      _type: "reference",
+      _type: 'reference',
       _ref: studentId,
     },
     training: {
-      _type: "reference",
+      _type: 'reference',
       _ref: trainingId,
     },
     enrolledAt: new Date().toISOString(),

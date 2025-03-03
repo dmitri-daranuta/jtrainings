@@ -1,5 +1,5 @@
-import { defineQuery } from "groq";
-import { sanityFetch } from "../live";
+import { defineQuery } from 'groq';
+import { sanityFetch } from '../live';
 
 export async function searchTrainings(term: string) {
   const searchQuery = defineQuery(`*[_type == "training" && (

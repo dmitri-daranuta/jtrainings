@@ -1,5 +1,5 @@
-import { isEnrolledInTraining } from "@/sanity/lib/student/isEnrolledInTraining";
-import { getStudentByClerkId } from "@/sanity/lib/student/getStudentByClerkId";
+import { isEnrolledInTraining } from '@/sanity/lib/student/isEnrolledInTraining';
+import { getStudentByClerkId } from '@/sanity/lib/student/getStudentByClerkId';
 import getTrainingById from '@/sanity/lib/trainings/getTrainingById';
 
 interface AuthResult {
@@ -10,12 +10,12 @@ interface AuthResult {
 
 export async function checkTrainingAccess(
   clerkId: string | null,
-  trainingId: string
+  trainingId: string,
 ): Promise<AuthResult> {
   if (!clerkId) {
     return {
       isAuthorized: false,
-      redirect: "/",
+      redirect: '/',
     };
   }
 
@@ -23,7 +23,7 @@ export async function checkTrainingAccess(
   if (!student?.data?._id) {
     return {
       isAuthorized: false,
-      redirect: "/",
+      redirect: '/',
     };
   }
 

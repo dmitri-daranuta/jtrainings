@@ -1,4 +1,4 @@
-import { type SchemaTypeDefinition } from 'sanity'
+import { type SchemaTypeDefinition } from 'sanity';
 import { categoryType } from './categoryType';
 import { enrollmentType } from './enrollmentType';
 import { instructorType } from './instructorType';
@@ -21,4 +21,4 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     trainingType,
     youtubeType,
   ],
-}
+};

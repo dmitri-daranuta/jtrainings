@@ -1,7 +1,10 @@
-import groq from "groq";
-import { sanityFetch } from "../live";
+import groq from 'groq';
+import { sanityFetch } from '../live';
 
-export async function isEnrolledInTraining(clerkId: string, trainingId: string) {
+export async function isEnrolledInTraining(
+  clerkId: string,
+  trainingId: string,
+) {
   try {
     // First get the student document using clerkId
     const studentQuery = groq`*[_type == "student" && clerkId == $clerkId][0]._id`;
@@ -11,7 +14,7 @@ export async function isEnrolledInTraining(clerkId: string, trainingId: string) 
     });
 
     if (!studentId) {
-      console.log("No student found with clerkId:", clerkId);
+      console.log('No student found with clerkId:', clerkId);
       return false;
     }
 
@@ -24,7 +27,7 @@ export async function isEnrolledInTraining(clerkId: string, trainingId: string) 
 
     return !!enrollment.data;
   } catch (error) {
-    console.error("Error checking enrollment status:", error);
+    console.error('Error checking enrollment status:', error);
     return false;
   }
 }

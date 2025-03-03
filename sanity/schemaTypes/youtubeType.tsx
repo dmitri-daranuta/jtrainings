@@ -15,15 +15,15 @@ export const youtubeType = defineType({
         return null;
       }
 
-      return <ReactPlayer url={title.toString()} />
-    }
+      return <ReactPlayer url={title.toString()} />;
+    },
   },
   fields: [
     defineField({
       name: 'url',
       title: 'YouTube Video URL',
       type: 'url',
-    })
+    }),
   ],
   preview: {
     select: {
@@ -32,7 +32,7 @@ export const youtubeType = defineType({
     prepare: ({ url }) => {
       return {
         title: url,
-      }
+      };
     },
   },
-})
+});

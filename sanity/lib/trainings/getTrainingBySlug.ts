@@ -1,5 +1,5 @@
-import { sanityFetch } from "../live";
-import { defineQuery } from "groq";
+import { sanityFetch } from '../live';
+import { defineQuery } from 'groq';
 
 export default async function getTrainingBySlug(slug: string) {
   const getTrainingBySlugQuery =

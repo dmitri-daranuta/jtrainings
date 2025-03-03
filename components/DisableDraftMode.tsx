@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { useTransition } from "react";
-import { useRouter } from "next/navigation";
-import { disableDraftMode } from "@/actions/disableDraftMode";
+import { useTransition } from 'react';
+import { useRouter } from 'next/navigation';
+import { disableDraftMode } from '@/actions/disableDraftMode';
 
 export function DisableDraftMode() {
   const router = useRouter();
@@ -21,7 +21,7 @@ export function DisableDraftMode() {
   return (
     <div>
       {pending ? (
-        "Disabling draft mode..."
+        'Disabling draft mode...'
       ) : (
         <button type="button" onClick={disable}>
           Disable draft mode
