@@ -5,3 +5,4 @@ coverage
 .prettierrc
 package-lock.json
 README.md
+tailwind.config.ts

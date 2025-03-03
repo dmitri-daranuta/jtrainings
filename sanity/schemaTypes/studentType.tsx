@@ -1,44 +1,44 @@
-import Image from "next/image";
-import { defineField, defineType } from "sanity";
+import Image from 'next/image';
+import { defineField, defineType } from 'sanity';
 
 export const studentType = defineType({
-  name: "student",
-  title: "Student",
-  type: "document",
+  name: 'student',
+  title: 'Student',
+  type: 'document',
   fields: [
     defineField({
-      name: "firstName",
-      title: "First Name",
-      type: "string",
+      name: 'firstName',
+      title: 'First Name',
+      type: 'string',
     }),
     defineField({
-      name: "lastName",
-      title: "Last Name",
-      type: "string",
+      name: 'lastName',
+      title: 'Last Name',
+      type: 'string',
     }),
     defineField({
-      name: "email",
-      title: "Email",
-      type: "string",
+      name: 'email',
+      title: 'Email',
+      type: 'string',
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: "clerkId",
-      title: "Clerk User ID",
-      type: "string",
+      name: 'clerkId',
+      title: 'Clerk User ID',
+      type: 'string',
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: "imageUrl",
-      title: "Profile Image URL",
-      type: "url",
+      name: 'imageUrl',
+      title: 'Profile Image URL',
+      type: 'url',
     }),
   ],
   preview: {
     select: {
-      firstName: "firstName",
-      lastName: "lastName",
-      imageUrl: "imageUrl",
+      firstName: 'firstName',
+      lastName: 'lastName',
+      imageUrl: 'imageUrl',
     },
     prepare({ firstName, lastName, imageUrl }) {
       return {

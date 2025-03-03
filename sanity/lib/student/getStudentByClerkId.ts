@@ -1,9 +1,9 @@
-import { defineQuery } from "groq";
-import { sanityFetch } from "../live";
+import { defineQuery } from 'groq';
+import { sanityFetch } from '../live';
 
 export async function getStudentByClerkId(clerkId: string) {
   const getStudentByClerkIdQuery = defineQuery(
-    `*[_type == "student" && clerkId == $clerkId][0]`
+    `*[_type == "student" && clerkId == $clerkId][0]`,
   );
 
   const student = await sanityFetch({

@@ -1,11 +1,11 @@
-import { urlFor } from "@/sanity/lib/image";
-import Image from "next/image";
-import Link from "next/link";
-import { ArrowLeft, BookOpen } from "lucide-react";
-import EnrollButton from "@/components/EnrollButton";
-import getTrainingBySlug from "@/sanity/lib/trainings/getTrainingBySlug";
-import { isEnrolledInTraining } from "@/sanity/lib/student/isEnrolledInTraining";
-import { auth } from "@clerk/nextjs/server";
+import { urlFor } from '@/sanity/lib/image';
+import Image from 'next/image';
+import Link from 'next/link';
+import { ArrowLeft, BookOpen } from 'lucide-react';
+import EnrollButton from '@/components/EnrollButton';
+import getTrainingBySlug from '@/sanity/lib/trainings/getTrainingBySlug';
+import { isEnrolledInTraining } from '@/sanity/lib/student/isEnrolledInTraining';
+import { auth } from '@clerk/nextjs/server';
 
 interface TrainingPageProps {
   params: Promise<{
@@ -37,8 +37,8 @@ export default async function TrainingPage({ params }: TrainingPageProps) {
       <div className="relative h-[60vh] w-full">
         {training.image && (
           <Image
-            src={urlFor(training.image).url() || ""}
-            alt={training.title || "Training Title"}
+            src={urlFor(training.image).url() || ''}
+            alt={training.title || 'Training Title'}
             fill
             className="object-cover"
             priority
@@ -58,7 +58,7 @@ export default async function TrainingPage({ params }: TrainingPageProps) {
             <div>
               <div className="flex items-center gap-2 mb-4">
                 <span className="px-3 py-1 bg-white/10 text-white rounded-full text-sm font-medium backdrop-blur-sm">
-                  {training.category?.name || "Uncategorized"}
+                  {training.category?.name || 'Uncategorized'}
                 </span>
               </div>
               <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
@@ -127,8 +127,10 @@ export default async function TrainingPage({ params }: TrainingPageProps) {
                     {training.instructor.photo && (
                       <div className="relative h-12 w-12">
                         <Image
-                          src={urlFor(training.instructor.photo).url() || ""}
-                          alt={training.instructor.name || "Training Instructor"}
+                          src={urlFor(training.instructor.photo).url() || ''}
+                          alt={
+                            training.instructor.name || 'Training Instructor'
+                          }
                           fill
                           className="rounded-full object-cover"
                         />

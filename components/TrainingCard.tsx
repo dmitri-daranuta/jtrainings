@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import Link from "next/link";
-import { BookOpen } from "lucide-react";
-import { urlFor } from "@/sanity/lib/image";
-import { Loader } from "@/components/ui/loader";
+import Image from 'next/image';
+import Link from 'next/link';
+import { BookOpen } from 'lucide-react';
+import { urlFor } from '@/sanity/lib/image';
+import { Loader } from '@/components/ui/loader';
 import { TrainingProgress } from '@/components/TrainingProgress';
 import { GetTrainingsQueryResult } from '@/sanity.types';
 
@@ -25,8 +25,8 @@ export function TrainingCard({ training, progress, href }: TrainingCardProps) {
         <div className="relative h-52 w-full overflow-hidden">
           {training.image ? (
             <Image
-              src={urlFor(training.image).url() || ""}
-              alt={training.title || "Training Image"}
+              src={urlFor(training.image).url() || ''}
+              alt={training.title || 'Training Image'}
               fill
               className="object-cover transition-transform duration-300 group-hover:scale-110"
             />
@@ -38,7 +38,7 @@ export function TrainingCard({ training, progress, href }: TrainingCardProps) {
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
           <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
             <span className="text-sm font-medium px-3 py-1 bg-black/50 text-white rounded-full backdrop-blur-sm">
-              {training.category?.name || "Uncategorized"}
+              {training.category?.name || 'Uncategorized'}
             </span>
           </div>
         </div>
@@ -56,8 +56,8 @@ export function TrainingCard({ training, progress, href }: TrainingCardProps) {
                   {training.instructor.photo ? (
                     <div className="relative h-8 w-8 mr-2">
                       <Image
-                        src={urlFor(training.instructor.photo).url() || ""}
-                        alt={training.instructor.name || "Instructor"}
+                        src={urlFor(training.instructor.photo).url() || ''}
+                        alt={training.instructor.name || 'Instructor'}
                         fill
                         className="rounded-full object-cover"
                       />
@@ -74,7 +74,7 @@ export function TrainingCard({ training, progress, href }: TrainingCardProps) {
                 <BookOpen className="h-4 w-4 text-muted-foreground" />
               </div>
             )}
-            {typeof progress === "number" && (
+            {typeof progress === 'number' && (
               <TrainingProgress
                 progress={progress}
                 variant="default"

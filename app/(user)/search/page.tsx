@@ -2,7 +2,11 @@ import { Search } from 'lucide-react';
 import { searchTrainings } from '@/sanity/lib/trainings/searchTrainings';
 import { TrainingCard } from '@/components/TrainingCard';
 
-export default async function SearchPage({searchParams}: {searchParams: Promise<{ [key: string]: string | undefined }>}) {
+export default async function SearchPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | undefined }>;
+}) {
   const term = (await searchParams).query ?? '';
   const decodedTerm = decodeURIComponent(term);
   const trainings = await searchTrainings(decodedTerm);
@@ -10,12 +14,12 @@ export default async function SearchPage({searchParams}: {searchParams: Promise<
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex items-center gap-4 mb-8">
-        <Search className="h-8 w-8 text-primary"/>
+        <Search className="h-8 w-8 text-primary" />
         <div>
           <h1 className="text-3xl font-bold">Search Results</h1>
           <p className="text-muted-foreground">
-            Found {trainings.length} result{trainings.length === 1 ? "" : "s"} for
-            &quot;{decodedTerm}&quot;
+            Found {trainings.length} result{trainings.length === 1 ? '' : 's'}{' '}
+            for &quot;{decodedTerm}&quot;
           </p>
         </div>
       </div>
@@ -39,5 +43,5 @@ export default async function SearchPage({searchParams}: {searchParams: Promise<
         </div>
       )}
     </div>
-  )
+  );
 }

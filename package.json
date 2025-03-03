@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "typegen": "sanity schema extract --enforce-required-fields && sanity typegen generate",
-    "prepare": "husky"
+    "prepare": "husky",
+    "pc": "npx prettier . --check",
+    "pw": "npx prettier . --write"
   },
   "dependencies": {
     "@clerk/nextjs": "^6.11.3",

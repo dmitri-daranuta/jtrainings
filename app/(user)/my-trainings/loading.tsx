@@ -4,9 +4,9 @@ function Loading() {
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="flex items-center gap-4 mb-8">
-          <div className="h-8 w-8 rounded-full bg-muted animate-pulse" />{" "}
+          <div className="h-8 w-8 rounded-full bg-muted animate-pulse" />{' '}
           {/* Graduation cap icon */}
-          <div className="h-10 w-48 bg-muted rounded-md animate-pulse" />{" "}
+          <div className="h-10 w-48 bg-muted rounded-md animate-pulse" />{' '}
           {/* "My Trainings" text */}
         </div>
 

@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { CheckCircle, Loader2, XCircle } from "lucide-react";
-import { Button } from "./ui/button";
-import { useState, useEffect, useTransition } from "react";
-import { completeLessonAction } from "@/actions/completeLessonAction";
-import { uncompleteLessonAction } from "@/actions/uncompleteLessonAction";
-import { getLessonCompletionStatusAction } from "@/actions/getLessonCompletionStatusAction";
-import { cn } from "@/lib/utils";
+import { CheckCircle, Loader2, XCircle } from 'lucide-react';
+import { Button } from './ui/button';
+import { useState, useEffect, useTransition } from 'react';
+import { completeLessonAction } from '@/actions/completeLessonAction';
+import { uncompleteLessonAction } from '@/actions/uncompleteLessonAction';
+import { getLessonCompletionStatusAction } from '@/actions/getLessonCompletionStatusAction';
+import { cn } from '@/lib/utils';
 
 interface LessonCompleteButtonProps {
   lessonId: string;
@@ -14,9 +14,9 @@ interface LessonCompleteButtonProps {
 }
 
 export function LessonCompleteButton({
-                                       lessonId,
-                                       clerkId,
-                                     }: LessonCompleteButtonProps) {
+  lessonId,
+  clerkId,
+}: LessonCompleteButtonProps) {
   const [isPending, setIsPending] = useState(false);
   const [isCompleted, setIsCompleted] = useState<boolean | null>(null);
   const [isPendingTransition, startTransition] = useTransition();
@@ -27,7 +27,7 @@ export function LessonCompleteButton({
         const status = await getLessonCompletionStatusAction(lessonId, clerkId);
         setIsCompleted(status);
       } catch (error) {
-        console.error("Error checking lesson completion status:", error);
+        console.error('Error checking lesson completion status:', error);
         setIsCompleted(false);
       }
     });
@@ -45,12 +45,12 @@ export function LessonCompleteButton({
       startTransition(async () => {
         const newStatus = await getLessonCompletionStatusAction(
           lessonId,
-          clerkId
+          clerkId,
         );
         setIsCompleted(newStatus);
       });
     } catch (error) {
-      console.error("Error toggling lesson completion:", error);
+      console.error('Error toggling lesson completion:', error);
     } finally {
       setIsPending(false);
     }
@@ -64,12 +64,12 @@ export function LessonCompleteButton({
         <div className="flex-1">
           <p className="text-sm font-medium">
             {isCompleted
-              ? "Lesson completed!"
-              : "Ready to complete this lesson?"}
+              ? 'Lesson completed!'
+              : 'Ready to complete this lesson?'}
           </p>
           <p className="text-sm text-muted-foreground">
             {isCompleted
-              ? "You can mark it as incomplete if you need to revisit it."
+              ? 'You can mark it as incomplete if you need to revisit it.'
               : "Mark it as complete when you're done."}
           </p>
         </div>
@@ -79,10 +79,10 @@ export function LessonCompleteButton({
           size="lg"
           variant="default"
           className={cn(
-            "min-w-[200px] transition-all duration-200 ease-in-out",
+            'min-w-[200px] transition-all duration-200 ease-in-out',
             isCompleted
-              ? "bg-red-600 hover:bg-red-700 text-white"
-              : "bg-green-600 hover:bg-green-700 text-white"
+              ? 'bg-red-600 hover:bg-red-700 text-white'
+              : 'bg-green-600 hover:bg-green-700 text-white',
           )}
         >
           {isLoading ? (
@@ -93,7 +93,7 @@ export function LessonCompleteButton({
           ) : isPending ? (
             <>
               <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-              {isCompleted ? "Uncompleting..." : "Completing..."}
+              {isCompleted ? 'Uncompleting...' : 'Completing...'}
             </>
           ) : isCompleted ? (
             <>

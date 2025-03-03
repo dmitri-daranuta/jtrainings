@@ -1,7 +1,7 @@
-import { redirect } from "next/navigation";
-import { currentUser } from "@clerk/nextjs/server";
-import { getLessonById } from "@/sanity/lib/lessons/getLessonById";
-import { LessonCompleteButton } from "@/components/LessonCompleteButton";
+import { redirect } from 'next/navigation';
+import { currentUser } from '@clerk/nextjs/server';
+import { getLessonById } from '@/sanity/lib/lessons/getLessonById';
+import { LessonCompleteButton } from '@/components/LessonCompleteButton';
 import RenderBodyContent from '@/components/RenderBodyContent';
 
 interface LessonPageProps {

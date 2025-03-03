@@ -1,15 +1,15 @@
-import { defineQuery } from "groq";
-import { sanityFetch } from "../live";
-import { getStudentByClerkId } from "../student/getStudentByClerkId";
-import { calculateTrainingProgress } from "@/lib/trainingProgress";
-import { Module } from "@/sanity.types";
+import { defineQuery } from 'groq';
+import { sanityFetch } from '../live';
+import { getStudentByClerkId } from '../student/getStudentByClerkId';
+import { calculateTrainingProgress } from '@/lib/trainingProgress';
+import { Module } from '@/sanity.types';
 
 export async function getTrainingProgress(clerkId: string, trainingId: string) {
   // First get the student's Sanity ID
   const student = await getStudentByClerkId(clerkId);
 
   if (!student?.data?._id) {
-    throw new Error("Student not found");
+    throw new Error('Student not found');
   }
 
   const progressQuery = defineQuery(`{
@@ -37,7 +37,7 @@ export async function getTrainingProgress(clerkId: string, trainingId: string) {
   // Calculate overall training progress
   const trainingProgress = calculateTrainingProgress(
     (training?.modules as unknown as Module[]) || null,
-    completedLessons
+    completedLessons,
   );
 
   return {
