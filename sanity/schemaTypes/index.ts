@@ -8,9 +8,11 @@ import { moduleType } from './moduleType';
 import { studentType } from './studentType';
 import { trainingType } from './trainingType';
 import { youtubeType } from './youtubeType';
+import { blogType } from './blogType';
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
+    blogType,
     categoryType,
     enrollmentType,
     instructorType,
