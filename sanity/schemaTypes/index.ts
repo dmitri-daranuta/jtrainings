@@ -5,6 +5,7 @@ import { instructorType } from './instructorType';
 import { lessonCompletionType } from './lessonCompletionType';
 import { lessonType } from './lessonType';
 import { moduleType } from './moduleType';
+import { postType } from './postType';
 import { studentType } from './studentType';
 import { trainingType } from './trainingType';
 import { youtubeType } from './youtubeType';
@@ -17,6 +18,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     lessonCompletionType,
     lessonType,
     moduleType,
+    postType,
     studentType,
     trainingType,
     youtubeType,

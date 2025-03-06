@@ -73,6 +73,57 @@ export type Youtube = {
   url?: string;
 };
 
+export type Post = {
+  _id: string;
+  _type: 'post';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title: string;
+  slug: Slug;
+  description?: string;
+  category: {
+    _ref: string;
+    _type: 'reference';
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: 'category';
+  };
+  content?: Array<
+    | {
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: 'span';
+          _key: string;
+        }>;
+        style?:
+          | 'normal'
+          | 'h1'
+          | 'h2'
+          | 'h3'
+          | 'h4'
+          | 'h5'
+          | 'h6'
+          | 'blockquote';
+        listItem?: 'bullet' | 'number';
+        markDefs?: Array<{
+          href?: string;
+          _type: 'link';
+          _key: string;
+        }>;
+        level?: number;
+        _type: 'block';
+        _key: string;
+      }
+    | ({
+        _key: string;
+      } & Code)
+    | ({
+        _key: string;
+      } & Youtube)
+  >;
+};
+
 export type LessonCompletion = {
   _id: string;
   _type: 'lessonCompletion';
@@ -352,6 +403,7 @@ export type AllSanitySchemaTypes =
   | SanityFileAsset
   | Geopoint
   | Youtube
+  | Post
   | LessonCompletion
   | Module
   | Lesson
