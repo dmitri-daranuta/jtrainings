@@ -14,9 +14,12 @@ import { codeInput } from '@sanity/code-input';
 import { apiVersion, dataset, projectId } from './sanity/env';
 import { schema } from './sanity/schemaTypes';
 import { structure } from './sanity/structure';
+import { BookOpen } from 'lucide-react';
 
 export default defineConfig({
   basePath: '/studio',
+  title: 'JTrainings',
+  icon: BookOpen,
   projectId,
   dataset,
   // Add and edit the content schema in the './sanity/schemaTypes' folder
