@@ -1,11 +1,11 @@
 import type { StructureResolver } from 'sanity/structure';
-import { BlockContentIcon, ControlsIcon } from '@sanity/icons';
+import { ControlsIcon, DocumentsIcon } from '@sanity/icons';
 import { BookIcon, TagsIcon, UsersIcon } from 'lucide-react';
 
 // https://www.sanity.io/docs/structure-builder-cheat-sheet
 export const structure: StructureResolver = (S) =>
   S.list()
-    .title('Admin Dashboard')
+    .title('Dashboard')
     .items([
       // Training Content
       S.listItem()
@@ -43,10 +43,10 @@ export const structure: StructureResolver = (S) =>
 
       S.divider(),
 
-      // Blog Content
-      S.listItem().title('Blogs').icon(BlockContentIcon).child(
-        S.documentTypeList('blog').title('Blog Content'),
-        //S.documentList().title('Blogs Content').filter('_type == "blog"'), // Display content without filter options
+      // Posts Content
+      S.listItem().title('Posts').icon(DocumentsIcon).child(
+        S.documentTypeList('post').title('Post Content'),
+        //S.documentList().title('Post Content').filter('_type == "post"'), // Display content without filter options
       ),
 
       S.divider(),
