@@ -1,12 +1,16 @@
 import type { StructureResolver } from 'sanity/structure';
+import { BlockContentIcon, ControlsIcon } from '@sanity/icons';
+import { BookIcon, TagsIcon, UsersIcon } from 'lucide-react';
 
 // https://www.sanity.io/docs/structure-builder-cheat-sheet
 export const structure: StructureResolver = (S) =>
   S.list()
     .title('Admin Dashboard')
     .items([
+      // Training Content
       S.listItem()
         .title('Trainings')
+        .icon(BookIcon)
         .child(
           S.documentTypeList('training')
             .title('Trainings')
@@ -39,9 +43,26 @@ export const structure: StructureResolver = (S) =>
 
       S.divider(),
 
-      // Users
+      // Blog Content
+      S.listItem().title('Blogs').icon(BlockContentIcon).child(
+        S.documentTypeList('blog').title('Blog Content'),
+        //S.documentList().title('Blogs Content').filter('_type == "blog"'), // Display content without filter options
+      ),
+
+      S.divider(),
+
+      // Categories Content
+      S.listItem()
+        .title('Categories')
+        .icon(TagsIcon)
+        .child(S.documentTypeList('category').title('Categories')),
+
+      S.divider(),
+
+      // Users Management
       S.listItem()
         .title('User Management')
+        .icon(UsersIcon)
         .child(
           S.list()
             .title('Select a Type of User')
@@ -49,6 +70,7 @@ export const structure: StructureResolver = (S) =>
               // Instructors with options
               S.listItem()
                 .title('Instructors')
+                .icon(UsersIcon)
                 .schemaType('instructor')
                 .child(
                   S.documentTypeList('instructor')
@@ -83,6 +105,7 @@ export const structure: StructureResolver = (S) =>
               // Students with options
               S.listItem()
                 .title('Students')
+                .icon(UsersIcon)
                 .schemaType('student')
                 .child(
                   S.documentTypeList('student')
@@ -137,10 +160,11 @@ export const structure: StructureResolver = (S) =>
 
       // System Management
       S.listItem()
-        .title('System Management')
+        .title('All Document Types')
+        .icon(ControlsIcon)
         .child(
           S.list()
             .title('System Management')
-            .items([S.documentTypeListItem('category').title('Categories')]),
+            .items([...S.documentTypeListItems()]),
         ),
     ]);

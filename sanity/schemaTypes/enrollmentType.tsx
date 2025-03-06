@@ -45,7 +45,7 @@ export const enrollmentType = defineType({
       studentImage,
     }) {
       const isTrainingContentView =
-        parent.location.pathname.includes('trainingContent');
+        parent.location.pathname.includes('trainings');
       return {
         title: !isTrainingContentView
           ? trainingTitle
