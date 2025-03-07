@@ -81,7 +81,7 @@ export type Post = {
   _rev: string;
   title: string;
   slug: Slug;
-  type?: 'tutorial' | 'guide' | 'article';
+  type?: 'article' | 'tutorial' | 'guide';
   description?: string;
   image?: {
     asset?: {
