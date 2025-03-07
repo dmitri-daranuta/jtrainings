@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 import { PortableText } from '@portabletext/react';
+import type { TypedObject } from '@portabletext/types';
 import Prism from 'prismjs';
 import 'prismjs/plugins/toolbar/prism-toolbar.min.css';
 import 'prismjs/plugins/toolbar/prism-toolbar.min';
@@ -14,7 +15,6 @@ import 'prismjs/components/prism-jsx';
 import 'prismjs/components/prism-tsx';
 import 'prismjs/components/prism-css';
 import 'prismjs/components/prism-json';
-import { Lesson } from '@/sanity.types';
 import ReactPlayer from 'react-player/youtube';
 
 interface CodeProps {
@@ -51,18 +51,22 @@ const components = {
   },
 };
 
-export default function RenderBodyContent({ lesson }: { lesson: Lesson }) {
+export default function RenderBodyContent({
+  content,
+}: {
+  content: TypedObject[];
+}) {
   useEffect(() => {
     Prism.highlightAll();
   }, []);
 
-  if (!lesson.content) {
+  if (!content) {
     return null;
   }
 
   return (
     <>
-      <PortableText value={lesson.content} components={components} />
+      <PortableText value={content} components={components} />
     </>
   );
 }

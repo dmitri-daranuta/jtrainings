@@ -36,7 +36,7 @@ export default async function LessonPage({ params }: LessonPageProps) {
             {lesson.content && (
               <div>
                 <div className="prose prose-blue dark:prose-invert max-w-none">
-                  <RenderBodyContent lesson={lesson} />
+                  <RenderBodyContent content={lesson.content} />
                 </div>
               </div>
             )}
