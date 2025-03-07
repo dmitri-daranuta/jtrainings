@@ -405,15 +405,15 @@
           "of": [
             {
               "type": "string",
+              "value": "article"
+            },
+            {
+              "type": "string",
               "value": "tutorial"
             },
             {
               "type": "string",
               "value": "guide"
-            },
-            {
-              "type": "string",
-              "value": "article"
             }
           ]
         },

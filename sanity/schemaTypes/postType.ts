@@ -1,4 +1,31 @@
 import { defineField, defineType } from 'sanity';
+import { SelectorFieldInput } from '@/sanity/schemaTypes/components/SelectorFieldInput';
+import { BlockContentIcon } from '@sanity/icons';
+import { PresentationIcon, RocketIcon } from 'lucide-react';
+
+export const TYPES = [
+  {
+    title: 'Article',
+    value: 'article',
+    description:
+      'A general piece of content that provides information, insights, or news on a specific topic.',
+    icon: BlockContentIcon,
+  },
+  {
+    title: 'Tutorial',
+    value: 'tutorial',
+    description:
+      'A step-by-step instructional guide designed to help users learn or complete a specific task.',
+    icon: PresentationIcon,
+  },
+  {
+    title: 'Guide',
+    value: 'guide',
+    description:
+      'A comprehensive resource that explains a topic in detail, often covering multiple aspects and best practices.',
+    icon: RocketIcon,
+  },
+];
 
 export const postType = defineType({
   name: 'post',
@@ -26,12 +53,10 @@ export const postType = defineType({
       title: 'Type',
       type: 'string',
       options: {
-        list: [
-          { title: 'Tutorial', value: 'tutorial' },
-          { title: 'Guide', value: 'guide' },
-          { title: 'Article', value: 'article' },
-        ],
+        list: TYPES.map(({ title, value }) => ({ title, value })),
+        layout: 'radio',
       },
+      components: { input: SelectorFieldInput },
     }),
     defineField({
       name: 'description',
