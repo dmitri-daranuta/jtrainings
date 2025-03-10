@@ -2,12 +2,22 @@
 
 import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs';
 import Link from 'next/link';
-import { BookMarkedIcon, BookOpen } from 'lucide-react';
+import { BookMarkedIcon, BookOpen, SquareLibrary } from 'lucide-react';
 import DarkModeToggle from '@/components/DarkModeToggle';
 import { Button } from '@/components/ui/button';
 import SearchInput from '@/components/SearchInput';
+import {
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  navigationMenuTriggerStyle,
+} from '@/components/ui/navigation-menu';
+import { usePathname } from 'next/navigation';
 
 export default function Header() {
+  const pathname = usePathname();
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border">
       <div className="container mx-auto px-4">
@@ -28,6 +38,23 @@ export default function Header() {
           </div>
 
           <div className="flex items-center space-x-2 md:space-x-4">
+            <NavigationMenu>
+              <NavigationMenuList>
+                <NavigationMenuItem>
+                  <NavigationMenuLink
+                    className={navigationMenuTriggerStyle()}
+                    asChild
+                    active={pathname == '/posts'}
+                  >
+                    <Link href="/posts">
+                      <SquareLibrary className="h-5 w-5 mr-2" />
+                      Knowledge Base
+                    </Link>
+                  </NavigationMenuLink>
+                </NavigationMenuItem>
+              </NavigationMenuList>
+            </NavigationMenu>
+
             <nav>
               <SignedIn>
                 <Link

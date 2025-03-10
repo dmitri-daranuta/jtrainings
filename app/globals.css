@@ -79,3 +79,7 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+a[data-active] {
+  background-color: hsl(var(--accent) / 0.5);
+}
