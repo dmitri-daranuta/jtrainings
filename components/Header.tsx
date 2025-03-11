@@ -44,9 +44,9 @@ export default function Header() {
                   <NavigationMenuLink
                     className={navigationMenuTriggerStyle()}
                     asChild
-                    active={pathname == '/posts'}
+                    active={pathname == '/knowledge-base'}
                   >
-                    <Link href="/posts">
+                    <Link href="/knowledge-base">
                       <SquareLibrary className="h-5 w-5 mr-2" />
                       Knowledge Base
                     </Link>
