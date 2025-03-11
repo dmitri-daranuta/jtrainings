@@ -391,6 +391,7 @@ export type Category = {
   _rev: string;
   name: string;
   slug: Slug;
+  icon?: string;
   description?: string;
 };
 
@@ -432,6 +433,21 @@ export type AllSanitySchemaTypes =
   | Slug
   | Code;
 export declare const internalGroqTypeReferenceTo: unique symbol;
+// Source: sanity/lib/categories/getCategories.ts
+// Variable: getCategoriesQuery
+// Query: *[_type == "category"] {    ...,    "slug": slug.current  }
+export type GetCategoriesQueryResult = Array<{
+  _id: string;
+  _type: 'category';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name: string;
+  slug: string;
+  icon?: string;
+  description?: string;
+}>;
+
 // Source: sanity/lib/lessons/getLessonById.ts
 // Variable: getLessonByIdQuery
 // Query: *[_type == "lesson" && _id == $id][0] {    ...,    "module": module->{      ...,      "training": training->{...}    }  }
@@ -889,6 +905,7 @@ export type GetPostBySlugQueryResult = {
     _rev: string;
     name: string;
     slug: Slug;
+    icon?: string;
     description?: string;
   };
   content?: Array<
@@ -959,6 +976,7 @@ export type GetPostsQueryResult = Array<{
     _rev: string;
     name: string;
     slug: Slug;
+    icon?: string;
     description?: string;
   };
   content?: Array<
@@ -1029,6 +1047,7 @@ export type GetPostsByTypeQueryResult = Array<{
     _rev: string;
     name: string;
     slug: Slug;
+    icon?: string;
     description?: string;
   };
   content?: Array<
@@ -1111,6 +1130,7 @@ export type GetEnrolledTrainingsQueryResult = {
         _rev: string;
         name: string;
         slug: Slug;
+        icon?: string;
         description?: string;
       };
       modules?: Array<{
@@ -1219,6 +1239,7 @@ export type GetTrainingByIdQueryResult = {
     _rev: string;
     name: string;
     slug: Slug;
+    icon?: string;
     description?: string;
   };
   modules: Array<{
@@ -1326,6 +1347,7 @@ export type GetTrainingBySlugQueryResult = {
     _rev: string;
     name: string;
     slug: Slug;
+    icon?: string;
     description?: string;
   };
   modules: Array<{
@@ -1433,6 +1455,7 @@ export type GetTrainingsQueryResult = Array<{
     _rev: string;
     name: string;
     slug: Slug;
+    icon?: string;
     description?: string;
   };
   modules?: Array<{
@@ -1495,6 +1518,7 @@ export type SearchQueryResult = Array<{
     _rev: string;
     name: string;
     slug: Slug;
+    icon?: string;
     description?: string;
   };
   modules?: Array<{
@@ -1530,6 +1554,7 @@ export type SearchQueryResult = Array<{
 import '@sanity/client';
 declare module '@sanity/client' {
   interface SanityQueries {
+    '*[_type == "category"] {\n    ...,\n    "slug": slug.current\n  }': GetCategoriesQueryResult;
     '*[_type == "lesson" && _id == $id][0] {\n    ...,\n    "module": module->{\n      ...,\n      "training": training->{...}\n    }\n  }': GetLessonByIdQueryResult;
     '*[_type == "lessonCompletion" && student._ref == $studentId && lesson._ref == $lessonId][0] {\n    ...\n  }': CompletionStatusQueryResult;
     '{\n    "completedLessons": *[_type == "lessonCompletion" && student._ref == $studentId && training._ref == $trainingId] {\n      ...,\n      "lesson": lesson->{...},\n      "module": module->{...}\n    },\n    "training": *[_type == "training" && _id == $trainingId][0] {\n      ...,\n      "modules": modules[]-> {\n        ...,\n        "lessons": lessons[]-> {...}\n      }\n    }\n  }':
