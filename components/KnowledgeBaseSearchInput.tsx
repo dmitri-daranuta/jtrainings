@@ -7,12 +7,18 @@ import { TYPES } from '@/sanity/schemaTypes/postType';
 export default function KnowledgeBaseSearchInput() {
   return (
     <Form action="/kb/search" className="w-full p-14">
-      <div className="flex rounded-full items-center h-14 bg-secondary outline-1 outline-offset-1 outline has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[select:focus-within]:outline-2 has-[selec:focus-within]:-outline-offset-2">
+      <div
+        className="flex rounded-full items-center h-14 bg-secondary outline-1 outline-offset-1 outline
+        has-[input:focus-within]:outline-2
+        has-[input:focus-within]:-outline-offset-2
+        has-[select:focus-within]:outline-2
+        has-[select:focus-within]:-outline-offset-2"
+      >
         <div className="grid shrink-0 grid-cols-1">
           <select
             name="t"
             aria-label="Type"
-            className="col-start-1 row-start-1 w-full h-14 appearance-none rounded-l-full py-1.5 pr-7 pl-3 text-base border-0 text-gray-900 focus:ring-primary placeholder:text-gray-400 sm:text-sm/6"
+            className="col-start-1 row-start-1 w-full h-14 appearance-none rounded-l-full py-1.5 pr-7 pl-3 text-base border-0 text-gray-900 focus:bg-neutral-200 focus:outline-none placeholder:text-gray-400 sm:text-sm/6"
           >
             <option value="all">All</option>
             {TYPES.map((type) => (
