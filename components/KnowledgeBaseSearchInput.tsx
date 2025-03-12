@@ -18,7 +18,7 @@ export default function KnowledgeBaseSearchInput() {
           <select
             name="t"
             aria-label="Type"
-            className="col-start-1 row-start-1 w-full h-14 appearance-none rounded-l-full py-1.5 pr-7 pl-3 text-base border-0 text-gray-900 focus:bg-neutral-200 focus:outline-none placeholder:text-gray-400 sm:text-sm/6"
+            className="col-start-1 row-start-1 w-full h-14 appearance-none rounded-l-full py-1.5 pr-7 pl-3 text-base text-center border-0 text-gray-900 focus:bg-neutral-200 focus:outline-none placeholder:text-gray-400 sm:text-sm/6"
           >
             <option value="all">All</option>
             {TYPES.map((type) => (
