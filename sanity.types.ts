@@ -1086,6 +1086,77 @@ export type GetPostsByTypeQueryResult = Array<{
   >;
 }>;
 
+// Source: sanity/lib/posts/searchPosts.ts
+// Variable: searchPostsQuery
+// Query: *[_type == "post" && (    title match $term + "*" ||    description match $term + "*" ||    category->name match $term + "*"  ) &&  ($type == "all" || type == $type)] {    ...,    "slug": slug.current,    "category": category->{...}  }
+export type SearchPostsQueryResult = Array<{
+  _id: string;
+  _type: 'post';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title: string;
+  slug: string;
+  type?: 'article' | 'guide' | 'tutorial';
+  description?: string;
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: 'reference';
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: 'image';
+  };
+  category: {
+    _id: string;
+    _type: 'category';
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    name: string;
+    slug: Slug;
+    icon?: string;
+    description?: string;
+  };
+  content?: Array<
+    | ({
+        _key: string;
+      } & Code)
+    | ({
+        _key: string;
+      } & Youtube)
+    | {
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: 'span';
+          _key: string;
+        }>;
+        style?:
+          | 'blockquote'
+          | 'h1'
+          | 'h2'
+          | 'h3'
+          | 'h4'
+          | 'h5'
+          | 'h6'
+          | 'normal';
+        listItem?: 'bullet' | 'number';
+        markDefs?: Array<{
+          href?: string;
+          _type: 'link';
+          _key: string;
+        }>;
+        level?: number;
+        _type: 'block';
+        _key: string;
+      }
+  >;
+}>;
+
 // Source: sanity/lib/student/getEnrolledTrainings.ts
 // Variable: getEnrolledTrainingsQuery
 // Query: *[_type == "student" && clerkId == $clerkId][0] {    "enrolledTrainings": *[_type == "enrollment" && student._ref == ^._id] {      ...,      "training": training-> {        ...,        "slug": slug.current,        "category": category->{...},        "instructor": instructor->{...}      }    }  }
@@ -1563,6 +1634,7 @@ declare module '@sanity/client' {
     '*[_type == "post" && slug.current == $slug][0] {\n      ...,\n      "category": category->{...},\n    }': GetPostBySlugQueryResult;
     '*[_type == "post"] {\n    ...,\n    "slug": slug.current,\n    "category": category->{...}\n  }': GetPostsQueryResult;
     '*[_type == "post" && type == $type] {\n      ...,\n      "slug": slug.current,\n      "category": category->{...}\n    }': GetPostsByTypeQueryResult;
+    '*[_type == "post" && (\n    title match $term + "*" ||\n    description match $term + "*" ||\n    category->name match $term + "*"\n  ) &&\n  ($type == "all" || type == $type)] {\n    ...,\n    "slug": slug.current,\n    "category": category->{...}\n  }': SearchPostsQueryResult;
     '*[_type == "student" && clerkId == $clerkId][0] {\n    "enrolledTrainings": *[_type == "enrollment" && student._ref == ^._id] {\n      ...,\n      "training": training-> {\n        ...,\n        "slug": slug.current,\n        "category": category->{...},\n        "instructor": instructor->{...}\n      }\n    }\n  }': GetEnrolledTrainingsQueryResult;
     '*[_type == "student" && clerkId == $clerkId][0]': GetStudentByClerkIdQueryResult;
     '*[_type == "student" && clerkId == $clerkId][0]._id': StudentQueryResult;
