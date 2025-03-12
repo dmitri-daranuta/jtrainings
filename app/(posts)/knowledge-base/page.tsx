@@ -22,7 +22,7 @@ export default async function KnowledgeBasePage() {
             <CategoryCard
               key={category._id}
               category={category}
-              href={`/kb/term/${category.slug}`}
+              href={`/kb/category/${category.slug}`}
             />
           ))}
         </div>
