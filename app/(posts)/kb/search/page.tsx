@@ -44,7 +44,7 @@ export default async function KBSearchPage({
               <PostCard
                 key={post._id}
                 post={post}
-                href={`/post/${post.slug}`}
+                href={`/kb/${post.type}/${post.slug}`}
               />
             ))}
           </div>
