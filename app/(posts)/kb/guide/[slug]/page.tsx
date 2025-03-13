@@ -2,6 +2,7 @@ import getPostBySlug from '@/sanity/lib/posts/getPostBySlug';
 import RenderBodyContent from '@/components/RenderBodyContent';
 import { notFound } from 'next/navigation';
 import PostHero from '@/components/PostHero';
+import PostSidebar from '@/components/PostSidebar';
 
 interface PostPageProps {
   params: Promise<{
@@ -42,11 +43,7 @@ export default async function GuidePage({ params }: PostPageProps) {
             </div>
           </div>
           {/* Sidebar */}
-          <div>
-            <div className="bg-card rounded-lg p-6 sticky top-4 border border-border">
-              Created at: {post._createdAt}
-            </div>
-          </div>
+          <PostSidebar post={post} />
         </div>
       </div>
     </div>
