@@ -448,6 +448,21 @@ export type GetCategoriesQueryResult = Array<{
   description?: string;
 }>;
 
+// Source: sanity/lib/categories/getCategoryBySlug.ts
+// Variable: getCategoryBySlugQuery
+// Query: *[_type == "category" && slug.current == $slug][0]
+export type GetCategoryBySlugQueryResult = {
+  _id: string;
+  _type: 'category';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name: string;
+  slug: Slug;
+  icon?: string;
+  description?: string;
+} | null;
+
 // Source: sanity/lib/lessons/getLessonById.ts
 // Variable: getLessonByIdQuery
 // Query: *[_type == "lesson" && _id == $id][0] {    ...,    "module": module->{      ...,      "training": training->{...}    }  }
@@ -1697,6 +1712,7 @@ import '@sanity/client';
 declare module '@sanity/client' {
   interface SanityQueries {
     '*[_type == "category"] {\n    ...,\n    "slug": slug.current\n  }': GetCategoriesQueryResult;
+    '*[_type == "category" && slug.current == $slug][0]': GetCategoryBySlugQueryResult;
     '*[_type == "lesson" && _id == $id][0] {\n    ...,\n    "module": module->{\n      ...,\n      "training": training->{...}\n    }\n  }': GetLessonByIdQueryResult;
     '*[_type == "lessonCompletion" && student._ref == $studentId && lesson._ref == $lessonId][0] {\n    ...\n  }': CompletionStatusQueryResult;
     '{\n    "completedLessons": *[_type == "lessonCompletion" && student._ref == $studentId && training._ref == $trainingId] {\n      ...,\n      "lesson": lesson->{...},\n      "module": module->{...}\n    },\n    "training": *[_type == "training" && _id == $trainingId][0] {\n      ...,\n      "modules": modules[]-> {\n        ...,\n        "lessons": lessons[]-> {...}\n      }\n    }\n  }':
