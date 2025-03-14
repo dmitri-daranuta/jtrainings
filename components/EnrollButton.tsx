@@ -1,11 +1,11 @@
 'use client';
 
-import { enrollTraining } from '@/actions/enrollTraining';
-import { useUser } from '@clerk/nextjs';
-import { CheckCircle } from 'lucide-react';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { useTransition } from 'react';
+import Link from 'next/link';
+import { CheckCircle } from 'lucide-react';
+import { useUser } from '@clerk/nextjs';
+import { useRouter } from '@bprogress/next/app';
+import { enrollTraining } from '@/actions/enrollTraining';
 
 function EnrollButton({
   trainingId,
