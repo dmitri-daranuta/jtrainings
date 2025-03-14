@@ -1,13 +1,35 @@
-import getPostBySlug from '@/sanity/lib/posts/getPostBySlug';
-import RenderBodyContent from '@/components/RenderBodyContent';
+import { Metadata, ResolvingMetadata } from 'next';
 import { notFound } from 'next/navigation';
+import RenderBodyContent from '@/components/RenderBodyContent';
 import PostHero from '@/components/PostHero';
 import PostSidebar from '@/components/PostSidebar';
+import { urlFor } from '@/sanity/lib/image';
+import getPostBySlug from '@/sanity/lib/posts/getPostBySlug';
 
 interface PostPageProps {
   params: Promise<{
     slug: string;
   }>;
+}
+
+export async function generateMetadata(
+  { params }: PostPageProps,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  const { slug } = await params;
+  const post = await getPostBySlug(slug);
+  const postImage = post?.image ? urlFor(post.image).url() : '';
+  const previousImages = (await parent).openGraph?.images || [];
+
+  return {
+    title: `${post?.title} | JTrainings`,
+    description: post?.description,
+    // TODO: Replace author with data from API.
+    authors: [{ name: 'John Wick', url: 'john-wick@john.wick' }],
+    openGraph: {
+      images: [postImage, ...previousImages],
+    },
+  };
 }
 
 export default async function ArticlePage({ params }: PostPageProps) {

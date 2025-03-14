@@ -1,10 +1,17 @@
-import Hero from '@/components/Hero';
+import { Metadata } from 'next';
 import { getTrainings } from '@/sanity/lib/trainings/getTrainings';
+import Hero from '@/components/Hero';
 import { TrainingCard } from '@/components/TrainingCard';
 import { DividerWithText } from '@/components/DividerWithText';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 3600;
+
+export const metadata: Metadata = {
+  title: 'Hands-On Trainings – Learn, Practice, and Master New Skills',
+  description:
+    'Boost your expertise with our hands-on trainings. Learn from structured courses, follow practical exercises, and gain real-world skills to advance your career.',
+};
 
 export default async function Home() {
   const trainings = await getTrainings();
