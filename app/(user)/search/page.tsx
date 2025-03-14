@@ -1,6 +1,13 @@
+import { Metadata } from 'next';
 import { Search } from 'lucide-react';
-import { searchTrainings } from '@/sanity/lib/trainings/searchTrainings';
 import { TrainingCard } from '@/components/TrainingCard';
+import { searchTrainings } from '@/sanity/lib/trainings/searchTrainings';
+
+export const metadata: Metadata = {
+  title: 'Search Trainings – Find the Right Course for You',
+  description:
+    'Looking for a training? Search our structured courses and hands-on exercises to find the best learning path for your goals.',
+};
 
 export default async function SearchPage({
   searchParams,

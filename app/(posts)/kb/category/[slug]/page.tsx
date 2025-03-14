@@ -1,14 +1,29 @@
+import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import { PostCard } from '@/components/PostCard';
 import { Divider } from '@/components/Divider';
-import getPostsByCategory from '@/sanity/lib/posts/getPostByCategory';
 import CategoryHero from '@/components/CategoryHero';
-import { notFound } from 'next/navigation';
+import getPostsByCategory from '@/sanity/lib/posts/getPostByCategory';
+import getCategoryBySlug from '@/sanity/lib/categories/getCategoryBySlug';
 
 interface CategoryPageProps {
   params: Promise<{
     slug: string;
   }>;
 }
+
+export async function generateMetadata({
+  params,
+}: CategoryPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const category = await getCategoryBySlug(slug);
+
+  return {
+    title: `${category?.name} | JTrainings`,
+    description: category?.description,
+  };
+}
+
 export default async function CategoryPage({ params }: CategoryPageProps) {
   const { slug } = await params;
   const posts = await getPostsByCategory(slug);

@@ -1,8 +1,15 @@
+import { Metadata } from 'next';
 import { Search } from 'lucide-react';
-import { searchPosts } from '@/sanity/lib/posts/searchPosts';
 import { PostCard } from '@/components/PostCard';
 import KnowledgeBaseHero from '@/components/KnowledgeBaseHero';
 import { Divider } from '@/components/Divider';
+import { searchPosts } from '@/sanity/lib/posts/searchPosts';
+
+export const metadata: Metadata = {
+  title: 'Search Knowledge Base – Articles, Tutorials & Guides',
+  description:
+    'Find expert-written articles, step-by-step tutorials, and in-depth guides to learn, troubleshoot, and master new skills.',
+};
 
 export default async function KBSearchPage({
   searchParams,
