@@ -8,6 +8,7 @@ import getPostBySlug from '@/sanity/lib/posts/getPostBySlug';
 
 interface PostPageProps {
   params: Promise<{
+    type: string;
     slug: string;
   }>;
 }
@@ -32,11 +33,11 @@ export async function generateMetadata(
   };
 }
 
-export default async function GuidePage({ params }: PostPageProps) {
-  const { slug } = await params;
+export default async function ArticlePage({ params }: PostPageProps) {
+  const { type, slug } = await params;
   const post = await getPostBySlug(slug);
 
-  if (!post || post?.type !== 'guide') {
+  if (!post || post?.type !== type) {
     notFound();
   }
 
