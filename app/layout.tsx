@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
-import './globals.css';
-import { ThemeProvider } from '@/components/ThemeProvider';
 import { draftMode } from 'next/headers';
+import { Geist, Geist_Mono } from 'next/font/google';
 import { VisualEditing } from 'next-sanity';
+import { ThemeProvider } from '@/components/ThemeProvider';
 import { DisableDraftMode } from '@/components/DisableDraftMode';
+import ProgressProvider from '@/components/providers/ProgressProvider';
+import './globals.css';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -43,7 +44,7 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <ProgressProvider>{children}</ProgressProvider>
         </ThemeProvider>
       </body>
     </html>
