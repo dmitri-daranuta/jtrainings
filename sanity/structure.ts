@@ -67,6 +67,11 @@ export const structure: StructureResolver = (S) =>
           S.list()
             .title('Select a Type of User')
             .items([
+              // Users
+              S.listItem()
+                .title('Users')
+                .icon(UsersIcon)
+                .child(S.documentTypeList('user').title('Users')),
               // Instructors with options
               S.listItem()
                 .title('Instructors')
