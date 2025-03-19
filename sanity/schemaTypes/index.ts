@@ -9,6 +9,7 @@ import { postType } from './postType';
 import { studentType } from './studentType';
 import { trainingType } from './trainingType';
 import { youtubeType } from './youtubeType';
+import { userType } from './userType';
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -22,5 +23,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     studentType,
     trainingType,
     youtubeType,
+    userType,
   ],
 };
