@@ -60,7 +60,7 @@ export const userType = defineType({
     prepare({ firstName, lastName, imageUrl, role }) {
       return {
         title: `${firstName.charAt(0).toUpperCase()}${firstName.slice(1)} ${lastName.charAt(0).toUpperCase()}${lastName.slice(1)}`,
-        subtitle: role,
+        subtitle: role.join(', '),
         media: (
           <Image
             src={imageUrl}

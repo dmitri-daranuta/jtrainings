@@ -68,6 +68,20 @@ export type Geopoint = {
   alt?: number;
 };
 
+export type User = {
+  _id: string;
+  _type: 'user';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  firstName?: string;
+  lastName?: string;
+  email: string;
+  clerkId: string;
+  imageUrl?: string;
+  role?: Array<string>;
+};
+
 export type Youtube = {
   _type: 'youtube';
   url?: string;
@@ -415,6 +429,7 @@ export type AllSanitySchemaTypes =
   | SanityImageDimensions
   | SanityFileAsset
   | Geopoint
+  | User
   | Youtube
   | Post
   | LessonCompletion
