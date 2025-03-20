@@ -48,7 +48,7 @@ export const trainingType = defineType({
       name: 'instructor',
       title: 'Instructor',
       type: 'reference',
-      to: { type: 'instructor' },
+      to: { type: 'user' },
     }),
   ],
 });
