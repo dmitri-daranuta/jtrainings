@@ -9,7 +9,7 @@ export const lessonCompletionType = defineType({
       name: 'student',
       title: 'Student',
       type: 'reference',
-      to: [{ type: 'student' }],
+      to: [{ type: 'user' }],
       validation: (rule) => rule.required(),
     }),
     defineField({
