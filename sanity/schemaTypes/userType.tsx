@@ -45,7 +45,7 @@ export const userType = defineType({
       options: {
         list: [
           { title: 'Authenticated', value: 'authenticated' },
-          { title: 'Creator', value: 'creator' },
+          { title: 'Author', value: 'author' },
         ],
       },
     }),
