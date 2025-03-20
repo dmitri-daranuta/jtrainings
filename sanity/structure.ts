@@ -72,37 +72,50 @@ export const structure: StructureResolver = (S) =>
                 .title('Users')
                 .icon(UsersIcon)
                 .child(S.documentTypeList('user').title('Users')),
-              // Instructors with options
+              // Authors with options
               S.listItem()
-                .title('Instructors')
+                .title('Authors')
                 .icon(UsersIcon)
-                .schemaType('instructor')
+                .schemaType('user')
                 .child(
-                  S.documentTypeList('instructor')
-                    .title('Instructors')
-                    .child((instructorId) =>
+                  S.documentTypeList('user')
+                    .title('Authors')
+                    .filter('"author" in role')
+                    .child((authorId) =>
                       S.list()
-                        .title('Instructor Options')
+                        .title('Authors Options')
                         .items([
-                          // Option to edit instructor details
+                          // Option to edit author details
                           S.listItem()
-                            .title('Edit Instructor Details')
+                            .title('Edit Author Details')
                             .child(
                               S.document()
-                                .schemaType('instructor')
-                                .documentId(instructorId),
+                                .schemaType('user')
+                                .documentId(authorId),
                             ),
-                          // Option to view instructor's trainings
+                          // Option to view author's trainings
                           S.listItem()
                             .title('View Trainings')
                             .child(
                               S.documentList()
-                                .title("Instructor's Trainings")
+                                .title("Author's Trainings")
                                 .apiVersion('v2025-02-18')
                                 .filter(
-                                  '_type == "training" && instructor._ref == $instructorId',
+                                  '_type == "training" && instructor._ref == $authorId',
                                 )
-                                .params({ instructorId }),
+                                .params({ authorId }),
+                            ),
+                          // Option to view author's posts
+                          S.listItem()
+                            .title('View Posts')
+                            .child(
+                              S.documentList()
+                                .title("Author's Posts")
+                                .apiVersion('v2025-02-18')
+                                .filter(
+                                  '_type == "post" && author._ref == $authorId',
+                                )
+                                .params({ authorId }),
                             ),
                         ]),
                     ),
@@ -111,10 +124,11 @@ export const structure: StructureResolver = (S) =>
               S.listItem()
                 .title('Students')
                 .icon(UsersIcon)
-                .schemaType('student')
+                .schemaType('user')
                 .child(
-                  S.documentTypeList('student')
+                  S.documentTypeList('user')
                     .title('Students')
+                    .filter('"authenticated" in role')
                     .child((studentId) =>
                       S.list()
                         .title('Student Options')
@@ -124,7 +138,7 @@ export const structure: StructureResolver = (S) =>
                             .title('Edit Student Details')
                             .child(
                               S.document()
-                                .schemaType('student')
+                                .schemaType('user')
                                 .documentId(studentId),
                             ),
                           // Option to view enrollments
