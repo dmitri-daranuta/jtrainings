@@ -106,5 +106,12 @@ export const postType = defineType({
         },
       ],
     }),
+    defineField({
+      name: 'author',
+      title: 'Authored by',
+      description: 'The username of the content author.',
+      type: 'reference',
+      to: [{ type: 'user' }],
+    }),
   ],
 });
