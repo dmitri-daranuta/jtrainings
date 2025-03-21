@@ -875,7 +875,7 @@ export type ProgressQueryResult = {
 
 // Source: sanity/lib/posts/getPostByCategory.ts
 // Variable: getPostsByCategoryQuery
-// Query: *[_type == "post" && category->slug.current == $term] {      ...,      "slug": slug.current,      "category": category->{...}    }
+// Query: *[_type == "post" && category->slug.current == $term] {      ...,      "slug": slug.current,      "category": category->{...},      "author": author->{...}    }
 export type GetPostsByCategoryQueryResult = Array<{
   _id: string;
   _type: 'post';
@@ -942,17 +942,24 @@ export type GetPostsByCategoryQueryResult = Array<{
         _key: string;
       }
   >;
-  author?: {
-    _ref: string;
-    _type: 'reference';
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: 'user';
-  };
+  author: {
+    _id: string;
+    _type: 'user';
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    firstName?: string;
+    lastName?: string;
+    email: string;
+    clerkId: string;
+    imageUrl?: string;
+    role?: Array<string>;
+  } | null;
 }>;
 
 // Source: sanity/lib/posts/getPostBySlug.ts
 // Variable: getPostBySlugQuery
-// Query: *[_type == "post" && slug.current == $slug][0] {      ...,      "category": category->{...},    }
+// Query: *[_type == "post" && slug.current == $slug][0] {      ...,      "category": category->{...},      "author": author->{...},    }
 export type GetPostBySlugQueryResult = {
   _id: string;
   _type: 'post';
@@ -1019,17 +1026,24 @@ export type GetPostBySlugQueryResult = {
         _key: string;
       }
   >;
-  author?: {
-    _ref: string;
-    _type: 'reference';
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: 'user';
-  };
+  author: {
+    _id: string;
+    _type: 'user';
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    firstName?: string;
+    lastName?: string;
+    email: string;
+    clerkId: string;
+    imageUrl?: string;
+    role?: Array<string>;
+  } | null;
 } | null;
 
 // Source: sanity/lib/posts/getPosts.ts
 // Variable: getPostsQuery
-// Query: *[_type == "post"] {    ...,    "slug": slug.current,    "category": category->{...}  }
+// Query: *[_type == "post"] {    ...,    "slug": slug.current,    "category": category->{...},    "author": author->{...}  }
 export type GetPostsQueryResult = Array<{
   _id: string;
   _type: 'post';
@@ -1096,17 +1110,24 @@ export type GetPostsQueryResult = Array<{
         _key: string;
       }
   >;
-  author?: {
-    _ref: string;
-    _type: 'reference';
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: 'user';
-  };
+  author: {
+    _id: string;
+    _type: 'user';
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    firstName?: string;
+    lastName?: string;
+    email: string;
+    clerkId: string;
+    imageUrl?: string;
+    role?: Array<string>;
+  } | null;
 }>;
 
 // Source: sanity/lib/posts/getPostsByType.ts
 // Variable: getPostsByTypeQuery
-// Query: *[_type == "post" && type == $type] {      ...,      "slug": slug.current,      "category": category->{...}    }
+// Query: *[_type == "post" && type == $type] {      ...,      "slug": slug.current,      "category": category->{...},      "author": author->{...}    }
 export type GetPostsByTypeQueryResult = Array<{
   _id: string;
   _type: 'post';
@@ -1173,17 +1194,24 @@ export type GetPostsByTypeQueryResult = Array<{
         _key: string;
       }
   >;
-  author?: {
-    _ref: string;
-    _type: 'reference';
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: 'user';
-  };
+  author: {
+    _id: string;
+    _type: 'user';
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    firstName?: string;
+    lastName?: string;
+    email: string;
+    clerkId: string;
+    imageUrl?: string;
+    role?: Array<string>;
+  } | null;
 }>;
 
 // Source: sanity/lib/posts/searchPosts.ts
 // Variable: searchPostsQuery
-// Query: *[_type == "post" && (    title match $term + "*" ||    description match $term + "*" ||    category->name match $term + "*"  ) &&  ($type == "all" || type == $type)] {    ...,    "slug": slug.current,    "category": category->{...}  }
+// Query: *[_type == "post" && (    title match $term + "*" ||    description match $term + "*" ||    category->name match $term + "*"  ) &&  ($type == "all" || type == $type)] {    ...,    "slug": slug.current,    "category": category->{...},    "author": author->{...}  }
 export type SearchPostsQueryResult = Array<{
   _id: string;
   _type: 'post';
@@ -1250,12 +1278,19 @@ export type SearchPostsQueryResult = Array<{
         _key: string;
       }
   >;
-  author?: {
-    _ref: string;
-    _type: 'reference';
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: 'user';
-  };
+  author: {
+    _id: string;
+    _type: 'user';
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    firstName?: string;
+    lastName?: string;
+    email: string;
+    clerkId: string;
+    imageUrl?: string;
+    role?: Array<string>;
+  } | null;
 }>;
 
 // Source: sanity/lib/student/getEnrolledTrainings.ts
@@ -1699,11 +1734,11 @@ declare module '@sanity/client' {
     '{\n    "completedLessons": *[_type == "lessonCompletion" && student._ref == $studentId && training._ref == $trainingId] {\n      ...,\n      "lesson": lesson->{...},\n      "module": module->{...}\n    },\n    "training": *[_type == "training" && _id == $trainingId][0] {\n      ...,\n      "modules": modules[]-> {\n        ...,\n        "lessons": lessons[]-> {...}\n      }\n    }\n  }':
       | GetCompletionsQueryResult
       | ProgressQueryResult;
-    '*[_type == "post" && category->slug.current == $term] {\n      ...,\n      "slug": slug.current,\n      "category": category->{...}\n    }': GetPostsByCategoryQueryResult;
-    '*[_type == "post" && slug.current == $slug][0] {\n      ...,\n      "category": category->{...},\n    }': GetPostBySlugQueryResult;
-    '*[_type == "post"] {\n    ...,\n    "slug": slug.current,\n    "category": category->{...}\n  }': GetPostsQueryResult;
-    '*[_type == "post" && type == $type] {\n      ...,\n      "slug": slug.current,\n      "category": category->{...}\n    }': GetPostsByTypeQueryResult;
-    '*[_type == "post" && (\n    title match $term + "*" ||\n    description match $term + "*" ||\n    category->name match $term + "*"\n  ) &&\n  ($type == "all" || type == $type)] {\n    ...,\n    "slug": slug.current,\n    "category": category->{...}\n  }': SearchPostsQueryResult;
+    '*[_type == "post" && category->slug.current == $term] {\n      ...,\n      "slug": slug.current,\n      "category": category->{...},\n      "author": author->{...}\n    }': GetPostsByCategoryQueryResult;
+    '*[_type == "post" && slug.current == $slug][0] {\n      ...,\n      "category": category->{...},\n      "author": author->{...},\n    }': GetPostBySlugQueryResult;
+    '*[_type == "post"] {\n    ...,\n    "slug": slug.current,\n    "category": category->{...},\n    "author": author->{...}\n  }': GetPostsQueryResult;
+    '*[_type == "post" && type == $type] {\n      ...,\n      "slug": slug.current,\n      "category": category->{...},\n      "author": author->{...}\n    }': GetPostsByTypeQueryResult;
+    '*[_type == "post" && (\n    title match $term + "*" ||\n    description match $term + "*" ||\n    category->name match $term + "*"\n  ) &&\n  ($type == "all" || type == $type)] {\n    ...,\n    "slug": slug.current,\n    "category": category->{...},\n    "author": author->{...}\n  }': SearchPostsQueryResult;
     '*[_type == "user" && clerkId == $clerkId][0] {\n    "enrolledTrainings": *[_type == "enrollment" && student._ref == ^._id] {\n      ...,\n      "training": training-> {\n        ...,\n        "slug": slug.current,\n        "category": category->{...},\n        "instructor": instructor->{...}\n      }\n    }\n  }': GetEnrolledTrainingsQueryResult;
     '*[_type == "user" && clerkId == $clerkId][0]._id': StudentQueryResult;
     '*[_type == "enrollment" && student._ref == $studentId && training._ref == $trainingId][0]': EnrollmentQueryResult;

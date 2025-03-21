@@ -21,12 +21,17 @@ export async function generateMetadata(
   const post = await getPostBySlug(slug);
   const postImage = post?.image ? urlFor(post.image).url() : '';
   const previousImages = (await parent).openGraph?.images || [];
+  const author = `${post?.author?.firstName} ${post?.author?.lastName}`;
 
   return {
     title: `${post?.title} | JTrainings`,
     description: post?.description,
-    // TODO: Replace author with data from API.
-    authors: [{ name: 'John Wick', url: 'john-wick@john.wick' }],
+    authors: [
+      {
+        name: author || 'John Wick',
+        url: post?.author?.email || 'john-wick@john.wick',
+      },
+    ],
     openGraph: {
       images: [postImage, ...previousImages],
     },
