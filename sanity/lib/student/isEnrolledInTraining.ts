@@ -7,7 +7,7 @@ export async function isEnrolledInTraining(
 ) {
   try {
     // First get the student document using clerkId
-    const studentQuery = groq`*[_type == "student" && clerkId == $clerkId][0]._id`;
+    const studentQuery = groq`*[_type == "user" && clerkId == $clerkId][0]._id`;
     const studentId = await sanityFetch({
       query: studentQuery,
       params: { clerkId },

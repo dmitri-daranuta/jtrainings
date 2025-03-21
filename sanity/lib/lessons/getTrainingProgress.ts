@@ -1,14 +1,14 @@
 import { defineQuery } from 'groq';
 import { sanityFetch } from '../live';
-import { getStudentByClerkId } from '../student/getStudentByClerkId';
-import { calculateTrainingProgress } from '@/lib/trainingProgress';
 import { Module } from '@/sanity.types';
+import { calculateTrainingProgress } from '@/lib/trainingProgress';
+import { getUserByClerkId } from '@/sanity/lib/users/users';
 
 export async function getTrainingProgress(clerkId: string, trainingId: string) {
   // First get the student's Sanity ID
-  const student = await getStudentByClerkId(clerkId);
+  const student = await getUserByClerkId(clerkId);
 
-  if (!student?.data?._id) {
+  if (!student?._id) {
     throw new Error('Student not found');
   }
 
@@ -29,7 +29,7 @@ export async function getTrainingProgress(clerkId: string, trainingId: string) {
 
   const result = await sanityFetch({
     query: progressQuery,
-    params: { studentId: student.data._id, trainingId },
+    params: { studentId: student._id, trainingId },
   });
 
   const { completedLessons = [], training } = result.data;

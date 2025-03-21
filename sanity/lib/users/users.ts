@@ -1,4 +1,6 @@
 import { client } from '../adminClient';
+import { defineQuery } from 'groq';
+import { sanityFetch } from '@/sanity/lib/live';
 
 export interface UserProps {
   clerkId: string;
@@ -66,4 +68,17 @@ export async function deleteUser({ clerkId }: { clerkId: string }) {
     .catch((err) => {
       console.error('Delete failed:', err.message);
     });
+}
+
+export async function getUserByClerkId(clerkId: string) {
+  const getUserByClerkIdQuery = defineQuery(
+    `*[_type == "user" && clerkId == $clerkId][0]`,
+  );
+
+  const user = await sanityFetch({
+    query: getUserByClerkIdQuery,
+    params: { clerkId },
+  });
+
+  return user.data;
 }
