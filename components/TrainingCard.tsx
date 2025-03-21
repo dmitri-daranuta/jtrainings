@@ -15,6 +15,8 @@ interface TrainingCardProps {
 }
 
 export function TrainingCard({ training, progress, href }: TrainingCardProps) {
+  const author = `${training?.instructor?.firstName} ${training?.instructor?.lastName}`;
+
   return (
     <Link
       href={href}
@@ -53,11 +55,11 @@ export function TrainingCard({ training, progress, href }: TrainingCardProps) {
             {training.instructor && (
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
-                  {training.instructor.photo ? (
+                  {training.instructor.imageUrl ? (
                     <div className="relative h-8 w-8 mr-2">
                       <Image
-                        src={urlFor(training.instructor.photo).url() || ''}
-                        alt={training.instructor.name || 'Instructor'}
+                        src={training.instructor.imageUrl || ''}
+                        alt={author || 'Instructor'}
                         fill
                         className="rounded-full object-cover"
                       />
@@ -68,7 +70,7 @@ export function TrainingCard({ training, progress, href }: TrainingCardProps) {
                     </div>
                   )}
                   <span className="text-sm text-muted-foreground">
-                    by {training.instructor.name}
+                    by {author}
                   </span>
                 </div>
                 <BookOpen className="h-4 w-4 text-muted-foreground" />
