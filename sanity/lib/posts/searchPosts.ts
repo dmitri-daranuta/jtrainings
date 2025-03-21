@@ -10,7 +10,8 @@ export async function searchPosts(term: string, type: string) {
   ($type == "all" || type == $type)] {
     ...,
     "slug": slug.current,
-    "category": category->{...}
+    "category": category->{...},
+    "author": author->{...}
   }`);
 
   const result = await sanityFetch({

@@ -6,7 +6,8 @@ export default async function getPostsByCategory(term: string) {
     defineQuery(`*[_type == "post" && category->slug.current == $term] {
       ...,
       "slug": slug.current,
-      "category": category->{...}
+      "category": category->{...},
+      "author": author->{...}
     }`);
 
   const posts = await sanityFetch({
