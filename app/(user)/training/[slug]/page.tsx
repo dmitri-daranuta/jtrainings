@@ -17,6 +17,7 @@ export default async function TrainingPage({ params }: TrainingPageProps) {
   const { slug } = await params;
   const training = await getTrainingBySlug(slug);
   const { userId } = await auth();
+  const author = `${training?.instructor?.firstName} ${training?.instructor?.lastName}`;
 
   const isEnrolled =
     userId && training?._id
@@ -124,32 +125,24 @@ export default async function TrainingPage({ params }: TrainingPageProps) {
                 <div>
                   <h2 className="text-xl font-bold mb-4">Instructor</h2>
                   <div className="flex items-center gap-3 mb-4">
-                    {training.instructor.photo && (
+                    {training.instructor.imageUrl && (
                       <div className="relative h-12 w-12">
                         <Image
-                          src={urlFor(training.instructor.photo).url() || ''}
-                          alt={
-                            training.instructor.name || 'Training Instructor'
-                          }
+                          src={training.instructor.imageUrl || ''}
+                          alt={author || 'Training Instructor'}
                           fill
                           className="rounded-full object-cover"
                         />
                       </div>
                     )}
                     <div>
-                      <div className="font-medium">
-                        {training.instructor.name}
-                      </div>
+                      <div className="font-medium">{author}</div>
                       <div className="text-sm text-muted-foreground">
                         Instructor
                       </div>
                     </div>
                   </div>
-                  {training.instructor.bio && (
-                    <p className="text-muted-foreground">
-                      {training.instructor.bio}
-                    </p>
-                  )}
+                  <p className="text-muted-foreground">some text</p>
                 </div>
               )}
             </div>
