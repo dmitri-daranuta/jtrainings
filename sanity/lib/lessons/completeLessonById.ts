@@ -1,7 +1,7 @@
 import groq from 'groq';
 import { client } from '../adminClient';
-import { getStudentByClerkId } from '../student/getStudentByClerkId';
 import { sanityFetch } from '../live';
+import { getUserByClerkId } from '@/sanity/lib/users/users';
 
 export async function completeLessonById({
   lessonId,
@@ -12,13 +12,13 @@ export async function completeLessonById({
 }) {
   try {
     // Get Sanity student ID from Clerk ID
-    const student = await getStudentByClerkId(clerkId);
+    const student = await getUserByClerkId(clerkId);
 
-    if (!student?.data?._id) {
+    if (!student?._id) {
       throw new Error('Student not found');
     }
 
-    const studentId = student.data._id;
+    const studentId = student._id;
 
     // Check if lesson is already completed
     const existingCompletion = await sanityFetch({

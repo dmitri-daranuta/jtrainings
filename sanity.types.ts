@@ -68,20 +68,6 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type User = {
-  _id: string;
-  _type: 'user';
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  firstName?: string;
-  lastName?: string;
-  email: string;
-  clerkId: string;
-  imageUrl?: string;
-  role?: Array<string>;
-};
-
 export type Youtube = {
   _type: 'youtube';
   url?: string;
@@ -148,6 +134,12 @@ export type Post = {
         _key: string;
       } & Youtube)
   >;
+  author?: {
+    _ref: string;
+    _type: 'reference';
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: 'user';
+  };
 };
 
 export type LessonCompletion = {
@@ -160,7 +152,7 @@ export type LessonCompletion = {
     _ref: string;
     _type: 'reference';
     _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: 'student';
+    [internalGroqTypeReferenceTo]?: 'user';
   };
   lesson: {
     _ref: string;
@@ -254,7 +246,7 @@ export type Enrollment = {
     _ref: string;
     _type: 'reference';
     _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: 'student';
+    [internalGroqTypeReferenceTo]?: 'user';
   };
   training: {
     _ref: string;
@@ -302,28 +294,7 @@ export type Training = {
     _ref: string;
     _type: 'reference';
     _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: 'instructor';
-  };
-};
-
-export type Instructor = {
-  _id: string;
-  _type: 'instructor';
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  name: string;
-  bio?: string;
-  photo?: {
-    asset?: {
-      _ref: string;
-      _type: 'reference';
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: 'image';
+    [internalGroqTypeReferenceTo]?: 'user';
   };
 };
 
@@ -384,9 +355,9 @@ export type SanityImageMetadata = {
   isOpaque?: boolean;
 };
 
-export type Student = {
+export type User = {
   _id: string;
-  _type: 'student';
+  _type: 'user';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -395,6 +366,7 @@ export type Student = {
   email: string;
   clerkId: string;
   imageUrl?: string;
+  role?: Array<string>;
 };
 
 export type Category = {
@@ -429,7 +401,6 @@ export type AllSanitySchemaTypes =
   | SanityImageDimensions
   | SanityFileAsset
   | Geopoint
-  | User
   | Youtube
   | Post
   | LessonCompletion
@@ -437,13 +408,12 @@ export type AllSanitySchemaTypes =
   | Lesson
   | Enrollment
   | Training
-  | Instructor
   | SanityImageCrop
   | SanityImageHotspot
   | SanityImageAsset
   | SanityAssetSourceData
   | SanityImageMetadata
-  | Student
+  | User
   | Category
   | Slug
   | Code;
@@ -540,7 +510,7 @@ export type CompletionStatusQueryResult = {
     _ref: string;
     _type: 'reference';
     _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: 'student';
+    [internalGroqTypeReferenceTo]?: 'user';
   };
   lesson: {
     _ref: string;
@@ -577,7 +547,7 @@ export type GetCompletionsQueryResult = {
       _ref: string;
       _type: 'reference';
       _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: 'student';
+      [internalGroqTypeReferenceTo]?: 'user';
     };
     lesson: {
       _id: string;
@@ -728,7 +698,7 @@ export type GetCompletionsQueryResult = {
       _ref: string;
       _type: 'reference';
       _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: 'instructor';
+      [internalGroqTypeReferenceTo]?: 'user';
     };
   } | null;
 };
@@ -747,7 +717,7 @@ export type ProgressQueryResult = {
       _ref: string;
       _type: 'reference';
       _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: 'student';
+      [internalGroqTypeReferenceTo]?: 'user';
     };
     lesson: {
       _id: string;
@@ -898,7 +868,7 @@ export type ProgressQueryResult = {
       _ref: string;
       _type: 'reference';
       _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: 'instructor';
+      [internalGroqTypeReferenceTo]?: 'user';
     };
   } | null;
 };
@@ -972,6 +942,12 @@ export type GetPostsByCategoryQueryResult = Array<{
         _key: string;
       }
   >;
+  author?: {
+    _ref: string;
+    _type: 'reference';
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: 'user';
+  };
 }>;
 
 // Source: sanity/lib/posts/getPostBySlug.ts
@@ -1043,6 +1019,12 @@ export type GetPostBySlugQueryResult = {
         _key: string;
       }
   >;
+  author?: {
+    _ref: string;
+    _type: 'reference';
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: 'user';
+  };
 } | null;
 
 // Source: sanity/lib/posts/getPosts.ts
@@ -1114,6 +1096,12 @@ export type GetPostsQueryResult = Array<{
         _key: string;
       }
   >;
+  author?: {
+    _ref: string;
+    _type: 'reference';
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: 'user';
+  };
 }>;
 
 // Source: sanity/lib/posts/getPostsByType.ts
@@ -1185,6 +1173,12 @@ export type GetPostsByTypeQueryResult = Array<{
         _key: string;
       }
   >;
+  author?: {
+    _ref: string;
+    _type: 'reference';
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: 'user';
+  };
 }>;
 
 // Source: sanity/lib/posts/searchPosts.ts
@@ -1256,11 +1250,17 @@ export type SearchPostsQueryResult = Array<{
         _key: string;
       }
   >;
+  author?: {
+    _ref: string;
+    _type: 'reference';
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: 'user';
+  };
 }>;
 
 // Source: sanity/lib/student/getEnrolledTrainings.ts
 // Variable: getEnrolledTrainingsQuery
-// Query: *[_type == "student" && clerkId == $clerkId][0] {    "enrolledTrainings": *[_type == "enrollment" && student._ref == ^._id] {      ...,      "training": training-> {        ...,        "slug": slug.current,        "category": category->{...},        "instructor": instructor->{...}      }    }  }
+// Query: *[_type == "user" && clerkId == $clerkId][0] {    "enrolledTrainings": *[_type == "enrollment" && student._ref == ^._id] {      ...,      "training": training-> {        ...,        "slug": slug.current,        "category": category->{...},        "instructor": instructor->{...}      }    }  }
 export type GetEnrolledTrainingsQueryResult = {
   enrolledTrainings: Array<{
     _id: string;
@@ -1272,7 +1272,7 @@ export type GetEnrolledTrainingsQueryResult = {
       _ref: string;
       _type: 'reference';
       _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: 'student';
+      [internalGroqTypeReferenceTo]?: 'user';
     };
     training: {
       _id: string;
@@ -1314,48 +1314,25 @@ export type GetEnrolledTrainingsQueryResult = {
       }>;
       instructor: {
         _id: string;
-        _type: 'instructor';
+        _type: 'user';
         _createdAt: string;
         _updatedAt: string;
         _rev: string;
-        name: string;
-        bio?: string;
-        photo?: {
-          asset?: {
-            _ref: string;
-            _type: 'reference';
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-          };
-          hotspot?: SanityImageHotspot;
-          crop?: SanityImageCrop;
-          _type: 'image';
-        };
+        firstName?: string;
+        lastName?: string;
+        email: string;
+        clerkId: string;
+        imageUrl?: string;
+        role?: Array<string>;
       } | null;
     };
     enrolledAt?: string;
   }>;
 } | null;
 
-// Source: sanity/lib/student/getStudentByClerkId.ts
-// Variable: getStudentByClerkIdQuery
-// Query: *[_type == "student" && clerkId == $clerkId][0]
-export type GetStudentByClerkIdQueryResult = {
-  _id: string;
-  _type: 'student';
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  firstName?: string;
-  lastName?: string;
-  email: string;
-  clerkId: string;
-  imageUrl?: string;
-} | null;
-
 // Source: sanity/lib/student/isEnrolledInTraining.ts
 // Variable: studentQuery
-// Query: *[_type == "student" && clerkId == $clerkId][0]._id
+// Query: *[_type == "user" && clerkId == $clerkId][0]._id
 export type StudentQueryResult = string | null;
 // Variable: enrollmentQuery
 // Query: *[_type == "enrollment" && student._ref == $studentId && training._ref == $trainingId][0]
@@ -1369,7 +1346,7 @@ export type EnrollmentQueryResult = {
     _ref: string;
     _type: 'reference';
     _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: 'student';
+    [internalGroqTypeReferenceTo]?: 'user';
   };
   training: {
     _ref: string;
@@ -1468,23 +1445,16 @@ export type GetTrainingByIdQueryResult = {
   }> | null;
   instructor: {
     _id: string;
-    _type: 'instructor';
+    _type: 'user';
     _createdAt: string;
     _updatedAt: string;
     _rev: string;
-    name: string;
-    bio?: string;
-    photo?: {
-      asset?: {
-        _ref: string;
-        _type: 'reference';
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-      };
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: 'image';
-    };
+    firstName?: string;
+    lastName?: string;
+    email: string;
+    clerkId: string;
+    imageUrl?: string;
+    role?: Array<string>;
   } | null;
 } | null;
 
@@ -1576,23 +1546,16 @@ export type GetTrainingBySlugQueryResult = {
   }> | null;
   instructor: {
     _id: string;
-    _type: 'instructor';
+    _type: 'user';
     _createdAt: string;
     _updatedAt: string;
     _rev: string;
-    name: string;
-    bio?: string;
-    photo?: {
-      asset?: {
-        _ref: string;
-        _type: 'reference';
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-      };
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: 'image';
-    };
+    firstName?: string;
+    lastName?: string;
+    email: string;
+    clerkId: string;
+    imageUrl?: string;
+    role?: Array<string>;
   } | null;
 } | null;
 
@@ -1639,23 +1602,16 @@ export type GetTrainingsQueryResult = Array<{
   }>;
   instructor: {
     _id: string;
-    _type: 'instructor';
+    _type: 'user';
     _createdAt: string;
     _updatedAt: string;
     _rev: string;
-    name: string;
-    bio?: string;
-    photo?: {
-      asset?: {
-        _ref: string;
-        _type: 'reference';
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-      };
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: 'image';
-    };
+    firstName?: string;
+    lastName?: string;
+    email: string;
+    clerkId: string;
+    imageUrl?: string;
+    role?: Array<string>;
   } | null;
 }>;
 
@@ -1702,25 +1658,35 @@ export type SearchQueryResult = Array<{
   }>;
   instructor: {
     _id: string;
-    _type: 'instructor';
+    _type: 'user';
     _createdAt: string;
     _updatedAt: string;
     _rev: string;
-    name: string;
-    bio?: string;
-    photo?: {
-      asset?: {
-        _ref: string;
-        _type: 'reference';
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-      };
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: 'image';
-    };
+    firstName?: string;
+    lastName?: string;
+    email: string;
+    clerkId: string;
+    imageUrl?: string;
+    role?: Array<string>;
   } | null;
 }>;
+
+// Source: sanity/lib/users/users.ts
+// Variable: getUserByClerkIdQuery
+// Query: *[_type == "user" && clerkId == $clerkId][0]
+export type GetUserByClerkIdQueryResult = {
+  _id: string;
+  _type: 'user';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  firstName?: string;
+  lastName?: string;
+  email: string;
+  clerkId: string;
+  imageUrl?: string;
+  role?: Array<string>;
+} | null;
 
 // Query TypeMap
 import '@sanity/client';
@@ -1738,13 +1704,13 @@ declare module '@sanity/client' {
     '*[_type == "post"] {\n    ...,\n    "slug": slug.current,\n    "category": category->{...}\n  }': GetPostsQueryResult;
     '*[_type == "post" && type == $type] {\n      ...,\n      "slug": slug.current,\n      "category": category->{...}\n    }': GetPostsByTypeQueryResult;
     '*[_type == "post" && (\n    title match $term + "*" ||\n    description match $term + "*" ||\n    category->name match $term + "*"\n  ) &&\n  ($type == "all" || type == $type)] {\n    ...,\n    "slug": slug.current,\n    "category": category->{...}\n  }': SearchPostsQueryResult;
-    '*[_type == "student" && clerkId == $clerkId][0] {\n    "enrolledTrainings": *[_type == "enrollment" && student._ref == ^._id] {\n      ...,\n      "training": training-> {\n        ...,\n        "slug": slug.current,\n        "category": category->{...},\n        "instructor": instructor->{...}\n      }\n    }\n  }': GetEnrolledTrainingsQueryResult;
-    '*[_type == "student" && clerkId == $clerkId][0]': GetStudentByClerkIdQueryResult;
-    '*[_type == "student" && clerkId == $clerkId][0]._id': StudentQueryResult;
+    '*[_type == "user" && clerkId == $clerkId][0] {\n    "enrolledTrainings": *[_type == "enrollment" && student._ref == ^._id] {\n      ...,\n      "training": training-> {\n        ...,\n        "slug": slug.current,\n        "category": category->{...},\n        "instructor": instructor->{...}\n      }\n    }\n  }': GetEnrolledTrainingsQueryResult;
+    '*[_type == "user" && clerkId == $clerkId][0]._id': StudentQueryResult;
     '*[_type == "enrollment" && student._ref == $studentId && training._ref == $trainingId][0]': EnrollmentQueryResult;
     '*[_type == "training" && _id == $id][0] {\n      ...,  // Spread all training fields\n      "category": category->{...},  // Expand the category reference, including all its fields\n      "instructor": instructor->{...},  // Expand the instructor reference, including all its fields\n      "modules": modules[]-> {  // Expand the array of module references\n        ...,  // Include all module fields\n        "lessons": lessons[]-> {...}  // For each module, expand its array of lesson references\n      }\n    }': GetTrainingByIdQueryResult;
     '*[_type == "training" && slug.current == $slug][0] {\n      ...,\n      "category": category->{...},\n      "instructor": instructor->{...},\n      "modules": modules[]-> {\n        ...,\n        "lessons": lessons[]-> {...}\n      }\n    }': GetTrainingBySlugQueryResult;
     '*[_type == "training"] {\n    ...,\n    "slug": slug.current,\n    "category": category->{...},\n    "instructor": instructor->{...}\n  }': GetTrainingsQueryResult;
     '*[_type == "training" && (\n    title match $term + "*" ||\n    description match $term + "*" ||\n    category->name match $term + "*"\n  )] {\n    ...,\n    "slug": slug.current,\n    "category": category->{...},\n    "instructor": instructor->{...}\n  }': SearchQueryResult;
+    '*[_type == "user" && clerkId == $clerkId][0]': GetUserByClerkIdQueryResult;
   }
 }

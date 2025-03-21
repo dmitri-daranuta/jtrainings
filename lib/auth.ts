@@ -1,6 +1,6 @@
 import { isEnrolledInTraining } from '@/sanity/lib/student/isEnrolledInTraining';
-import { getStudentByClerkId } from '@/sanity/lib/student/getStudentByClerkId';
 import getTrainingById from '@/sanity/lib/trainings/getTrainingById';
+import { getUserByClerkId } from '@/sanity/lib/users/users';
 
 interface AuthResult {
   isAuthorized: boolean;
@@ -19,8 +19,8 @@ export async function checkTrainingAccess(
     };
   }
 
-  const student = await getStudentByClerkId(clerkId);
-  if (!student?.data?._id) {
+  const student = await getUserByClerkId(clerkId);
+  if (!student?._id) {
     return {
       isAuthorized: false,
       redirect: '/',
@@ -38,6 +38,6 @@ export async function checkTrainingAccess(
 
   return {
     isAuthorized: true,
-    studentId: student.data._id,
+    studentId: student._id,
   };
 }
