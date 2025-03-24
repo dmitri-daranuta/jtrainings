@@ -65,7 +65,7 @@ export default function Header() {
                   md:border md:border-border md:rounded-md md:px-4 md:py-2"
                 >
                   <BookMarkedIcon className="h-4 w-4" />
-                  <span className="hidden md:block">My Trainings</span>
+                  <span className="hidden md:block">My Learning</span>
                 </Link>
               </SignedIn>
             </nav>

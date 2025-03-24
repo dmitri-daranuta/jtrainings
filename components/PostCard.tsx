@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { urlFor } from '@/sanity/lib/image';
 import { Loader } from '@/components/ui/loader';
 import { GetPostsByTypeQueryResult } from '@/sanity.types';
+import { BookOpen } from 'lucide-react';
 
 interface PostCardProps {
   post: GetPostsByTypeQueryResult[number];
@@ -12,6 +13,8 @@ interface PostCardProps {
 }
 
 export function PostCard({ post, href }: PostCardProps) {
+  const author = `${post?.author?.firstName} ${post?.author?.lastName}`;
+
   return (
     <Link
       href={href}
@@ -46,6 +49,32 @@ export function PostCard({ post, href }: PostCardProps) {
           <p className="text-muted-foreground mb-4 line-clamp-2 flex-1">
             {post.description}
           </p>
+          <div className="space-y-4 mt-auto">
+            {post.author && (
+              <div className="flex items-center justify-between">
+                <div className="flex items-center">
+                  {post.author.imageUrl ? (
+                    <div className="relative h-8 w-8 mr-2">
+                      <Image
+                        src={post.author.imageUrl || ''}
+                        alt={author || 'Instructor'}
+                        fill
+                        className="rounded-full object-cover"
+                      />
+                    </div>
+                  ) : (
+                    <div className="h-8 w-8 mr-2 rounded-full bg-muted flex items-center justify-center">
+                      <Loader size="sm" />
+                    </div>
+                  )}
+                  <span className="text-sm text-muted-foreground">
+                    by {author}
+                  </span>
+                </div>
+                <BookOpen className="h-4 w-4 text-muted-foreground" />
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </Link>
