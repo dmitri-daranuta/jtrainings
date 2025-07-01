@@ -4,7 +4,7 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import { VisualEditing } from 'next-sanity';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import { DisableDraftMode } from '@/components/DisableDraftMode';
-import ProgressProvider from '@/components/providers/ProgressProvider';
+import Providers from '@/components/providers/ProgressProvider';
 import './globals.css';
 
 const geistSans = Geist({
@@ -44,7 +44,7 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <ProgressProvider>{children}</ProgressProvider>
+          <Providers>{children}</Providers>
         </ThemeProvider>
       </body>
     </html>
