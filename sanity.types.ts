@@ -13,61 +13,6 @@
  */
 
 // Source: schema.json
-export type SanityImagePaletteSwatch = {
-  _type: 'sanity.imagePaletteSwatch';
-  background?: string;
-  foreground?: string;
-  population?: number;
-  title?: string;
-};
-
-export type SanityImagePalette = {
-  _type: 'sanity.imagePalette';
-  darkMuted?: SanityImagePaletteSwatch;
-  lightVibrant?: SanityImagePaletteSwatch;
-  darkVibrant?: SanityImagePaletteSwatch;
-  vibrant?: SanityImagePaletteSwatch;
-  dominant?: SanityImagePaletteSwatch;
-  lightMuted?: SanityImagePaletteSwatch;
-  muted?: SanityImagePaletteSwatch;
-};
-
-export type SanityImageDimensions = {
-  _type: 'sanity.imageDimensions';
-  height?: number;
-  width?: number;
-  aspectRatio?: number;
-};
-
-export type SanityFileAsset = {
-  _id: string;
-  _type: 'sanity.fileAsset';
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  originalFilename?: string;
-  label?: string;
-  title?: string;
-  description?: string;
-  altText?: string;
-  sha1hash?: string;
-  extension?: string;
-  mimeType?: string;
-  size?: number;
-  assetId?: string;
-  uploadId?: string;
-  path?: string;
-  url?: string;
-  source?: SanityAssetSourceData;
-};
-
-export type Geopoint = {
-  _type: 'geopoint';
-  lat?: number;
-  lng?: number;
-  alt?: number;
-};
-
 export type Youtube = {
   _type: 'youtube';
   url?: string;
@@ -79,8 +24,8 @@ export type Post = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title: string;
-  slug: Slug;
+  title?: string;
+  slug?: Slug;
   type?: 'article' | 'tutorial' | 'guide';
   description?: string;
   image?: {
@@ -90,11 +35,12 @@ export type Post = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     _type: 'image';
   };
-  category: {
+  category?: {
     _ref: string;
     _type: 'reference';
     _weak?: boolean;
@@ -148,31 +94,31 @@ export type LessonCompletion = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  student: {
+  student?: {
     _ref: string;
     _type: 'reference';
     _weak?: boolean;
     [internalGroqTypeReferenceTo]?: 'user';
   };
-  lesson: {
+  lesson?: {
     _ref: string;
     _type: 'reference';
     _weak?: boolean;
     [internalGroqTypeReferenceTo]?: 'lesson';
   };
-  module: {
+  module?: {
     _ref: string;
     _type: 'reference';
     _weak?: boolean;
     [internalGroqTypeReferenceTo]?: 'module';
   };
-  training: {
+  training?: {
     _ref: string;
     _type: 'reference';
     _weak?: boolean;
     [internalGroqTypeReferenceTo]?: 'training';
   };
-  completedAt: string;
+  completedAt?: string;
 };
 
 export type Module = {
@@ -181,7 +127,7 @@ export type Module = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title: string;
+  title?: string;
   lessons?: Array<{
     _ref: string;
     _type: 'reference';
@@ -197,8 +143,8 @@ export type Lesson = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title: string;
-  slug: Slug;
+  title?: string;
+  slug?: Slug;
   description?: string;
   content?: Array<
     | {
@@ -242,13 +188,13 @@ export type Enrollment = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  student: {
+  student?: {
     _ref: string;
     _type: 'reference';
     _weak?: boolean;
     [internalGroqTypeReferenceTo]?: 'user';
   };
-  training: {
+  training?: {
     _ref: string;
     _type: 'reference';
     _weak?: boolean;
@@ -263,8 +209,8 @@ export type Training = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title: string;
-  slug: Slug;
+  title?: string;
+  slug?: Slug;
   description?: string;
   image?: {
     asset?: {
@@ -273,11 +219,12 @@ export type Training = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     _type: 'image';
   };
-  category: {
+  category?: {
     _ref: string;
     _type: 'reference';
     _weak?: boolean;
@@ -298,12 +245,69 @@ export type Training = {
   };
 };
 
-export type SanityImageCrop = {
-  _type: 'sanity.imageCrop';
-  top?: number;
-  bottom?: number;
-  left?: number;
-  right?: number;
+export type User = {
+  _id: string;
+  _type: 'user';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  clerkId?: string;
+  imageUrl?: string;
+  role?: Array<string>;
+};
+
+export type Category = {
+  _id: string;
+  _type: 'category';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  slug?: Slug;
+  icon?: {
+    library?: string;
+    name?: string;
+    color?: string;
+    colored?: boolean;
+  };
+  description?: string;
+};
+
+export type Code = {
+  _type: 'code';
+  language?: string;
+  filename?: string;
+  code?: string;
+  highlightedLines?: Array<number>;
+};
+
+export type SanityImagePaletteSwatch = {
+  _type: 'sanity.imagePaletteSwatch';
+  background?: string;
+  foreground?: string;
+  population?: number;
+  title?: string;
+};
+
+export type SanityImagePalette = {
+  _type: 'sanity.imagePalette';
+  darkMuted?: SanityImagePaletteSwatch;
+  lightVibrant?: SanityImagePaletteSwatch;
+  darkVibrant?: SanityImagePaletteSwatch;
+  vibrant?: SanityImagePaletteSwatch;
+  dominant?: SanityImagePaletteSwatch;
+  lightMuted?: SanityImagePaletteSwatch;
+  muted?: SanityImagePaletteSwatch;
+};
+
+export type SanityImageDimensions = {
+  _type: 'sanity.imageDimensions';
+  height?: number;
+  width?: number;
+  aspectRatio?: number;
 };
 
 export type SanityImageHotspot = {
@@ -312,6 +316,36 @@ export type SanityImageHotspot = {
   y?: number;
   height?: number;
   width?: number;
+};
+
+export type SanityImageCrop = {
+  _type: 'sanity.imageCrop';
+  top?: number;
+  bottom?: number;
+  left?: number;
+  right?: number;
+};
+
+export type SanityFileAsset = {
+  _id: string;
+  _type: 'sanity.fileAsset';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  originalFilename?: string;
+  label?: string;
+  title?: string;
+  description?: string;
+  altText?: string;
+  sha1hash?: string;
+  extension?: string;
+  mimeType?: string;
+  size?: number;
+  assetId?: string;
+  uploadId?: string;
+  path?: string;
+  url?: string;
+  source?: SanityAssetSourceData;
 };
 
 export type SanityImageAsset = {
@@ -337,13 +371,6 @@ export type SanityImageAsset = {
   source?: SanityAssetSourceData;
 };
 
-export type SanityAssetSourceData = {
-  _type: 'sanity.assetSourceData';
-  name?: string;
-  id?: string;
-  url?: string;
-};
-
 export type SanityImageMetadata = {
   _type: 'sanity.imageMetadata';
   location?: Geopoint;
@@ -355,52 +382,27 @@ export type SanityImageMetadata = {
   isOpaque?: boolean;
 };
 
-export type User = {
-  _id: string;
-  _type: 'user';
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  firstName?: string;
-  lastName?: string;
-  email: string;
-  clerkId: string;
-  imageUrl?: string;
-  role?: Array<string>;
-};
-
-export type Category = {
-  _id: string;
-  _type: 'category';
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  name: string;
-  slug: Slug;
-  icon?: string;
-  description?: string;
+export type Geopoint = {
+  _type: 'geopoint';
+  lat?: number;
+  lng?: number;
+  alt?: number;
 };
 
 export type Slug = {
   _type: 'slug';
-  current: string;
+  current?: string;
   source?: string;
 };
 
-export type Code = {
-  _type: 'code';
-  language?: string;
-  filename?: string;
-  code?: string;
-  highlightedLines?: Array<number>;
+export type SanityAssetSourceData = {
+  _type: 'sanity.assetSourceData';
+  name?: string;
+  id?: string;
+  url?: string;
 };
 
 export type AllSanitySchemaTypes =
-  | SanityImagePaletteSwatch
-  | SanityImagePalette
-  | SanityImageDimensions
-  | SanityFileAsset
-  | Geopoint
   | Youtube
   | Post
   | LessonCompletion
@@ -408,15 +410,20 @@ export type AllSanitySchemaTypes =
   | Lesson
   | Enrollment
   | Training
-  | SanityImageCrop
-  | SanityImageHotspot
-  | SanityImageAsset
-  | SanityAssetSourceData
-  | SanityImageMetadata
   | User
   | Category
+  | Code
+  | SanityImagePaletteSwatch
+  | SanityImagePalette
+  | SanityImageDimensions
+  | SanityImageHotspot
+  | SanityImageCrop
+  | SanityFileAsset
+  | SanityImageAsset
+  | SanityImageMetadata
+  | Geopoint
   | Slug
-  | Code;
+  | SanityAssetSourceData;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: sanity/lib/categories/getCategories.ts
 // Variable: getCategoriesQuery
@@ -427,9 +434,14 @@ export type GetCategoriesQueryResult = Array<{
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  name: string;
-  slug: string;
-  icon?: string;
+  name?: string;
+  slug: string | null;
+  icon?: {
+    library?: string;
+    name?: string;
+    color?: string;
+    colored?: boolean;
+  };
   description?: string;
 }>;
 
@@ -442,9 +454,14 @@ export type GetCategoryBySlugQueryResult = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  name: string;
-  slug: Slug;
-  icon?: string;
+  name?: string;
+  slug?: Slug;
+  icon?: {
+    library?: string;
+    name?: string;
+    color?: string;
+    colored?: boolean;
+  };
   description?: string;
 } | null;
 
@@ -457,8 +474,8 @@ export type GetLessonByIdQueryResult = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title: string;
-  slug: Slug;
+  title?: string;
+  slug?: Slug;
   description?: string;
   content?: Array<
     | ({
@@ -506,31 +523,31 @@ export type CompletionStatusQueryResult = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  student: {
+  student?: {
     _ref: string;
     _type: 'reference';
     _weak?: boolean;
     [internalGroqTypeReferenceTo]?: 'user';
   };
-  lesson: {
+  lesson?: {
     _ref: string;
     _type: 'reference';
     _weak?: boolean;
     [internalGroqTypeReferenceTo]?: 'lesson';
   };
-  module: {
+  module?: {
     _ref: string;
     _type: 'reference';
     _weak?: boolean;
     [internalGroqTypeReferenceTo]?: 'module';
   };
-  training: {
+  training?: {
     _ref: string;
     _type: 'reference';
     _weak?: boolean;
     [internalGroqTypeReferenceTo]?: 'training';
   };
-  completedAt: string;
+  completedAt?: string;
 } | null;
 
 // Source: sanity/lib/lessons/getLessonCompletions.ts
@@ -543,7 +560,7 @@ export type GetCompletionsQueryResult = {
     _createdAt: string;
     _updatedAt: string;
     _rev: string;
-    student: {
+    student?: {
       _ref: string;
       _type: 'reference';
       _weak?: boolean;
@@ -555,8 +572,8 @@ export type GetCompletionsQueryResult = {
       _createdAt: string;
       _updatedAt: string;
       _rev: string;
-      title: string;
-      slug: Slug;
+      title?: string;
+      slug?: Slug;
       description?: string;
       content?: Array<
         | ({
@@ -592,14 +609,14 @@ export type GetCompletionsQueryResult = {
             _key: string;
           }
       >;
-    };
+    } | null;
     module: {
       _id: string;
       _type: 'module';
       _createdAt: string;
       _updatedAt: string;
       _rev: string;
-      title: string;
+      title?: string;
       lessons?: Array<{
         _ref: string;
         _type: 'reference';
@@ -607,14 +624,14 @@ export type GetCompletionsQueryResult = {
         _key: string;
         [internalGroqTypeReferenceTo]?: 'lesson';
       }>;
-    };
-    training: {
+    } | null;
+    training?: {
       _ref: string;
       _type: 'reference';
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: 'training';
     };
-    completedAt: string;
+    completedAt?: string;
   }>;
   training: {
     _id: string;
@@ -622,8 +639,8 @@ export type GetCompletionsQueryResult = {
     _createdAt: string;
     _updatedAt: string;
     _rev: string;
-    title: string;
-    slug: Slug;
+    title?: string;
+    slug?: Slug;
     description?: string;
     image?: {
       asset?: {
@@ -632,11 +649,12 @@ export type GetCompletionsQueryResult = {
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
       };
+      media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       _type: 'image';
     };
-    category: {
+    category?: {
       _ref: string;
       _type: 'reference';
       _weak?: boolean;
@@ -648,15 +666,15 @@ export type GetCompletionsQueryResult = {
       _createdAt: string;
       _updatedAt: string;
       _rev: string;
-      title: string;
+      title?: string;
       lessons: Array<{
         _id: string;
         _type: 'lesson';
         _createdAt: string;
         _updatedAt: string;
         _rev: string;
-        title: string;
-        slug: Slug;
+        title?: string;
+        slug?: Slug;
         description?: string;
         content?: Array<
           | ({
@@ -713,7 +731,7 @@ export type ProgressQueryResult = {
     _createdAt: string;
     _updatedAt: string;
     _rev: string;
-    student: {
+    student?: {
       _ref: string;
       _type: 'reference';
       _weak?: boolean;
@@ -725,8 +743,8 @@ export type ProgressQueryResult = {
       _createdAt: string;
       _updatedAt: string;
       _rev: string;
-      title: string;
-      slug: Slug;
+      title?: string;
+      slug?: Slug;
       description?: string;
       content?: Array<
         | ({
@@ -762,14 +780,14 @@ export type ProgressQueryResult = {
             _key: string;
           }
       >;
-    };
+    } | null;
     module: {
       _id: string;
       _type: 'module';
       _createdAt: string;
       _updatedAt: string;
       _rev: string;
-      title: string;
+      title?: string;
       lessons?: Array<{
         _ref: string;
         _type: 'reference';
@@ -777,14 +795,14 @@ export type ProgressQueryResult = {
         _key: string;
         [internalGroqTypeReferenceTo]?: 'lesson';
       }>;
-    };
-    training: {
+    } | null;
+    training?: {
       _ref: string;
       _type: 'reference';
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: 'training';
     };
-    completedAt: string;
+    completedAt?: string;
   }>;
   training: {
     _id: string;
@@ -792,8 +810,8 @@ export type ProgressQueryResult = {
     _createdAt: string;
     _updatedAt: string;
     _rev: string;
-    title: string;
-    slug: Slug;
+    title?: string;
+    slug?: Slug;
     description?: string;
     image?: {
       asset?: {
@@ -802,11 +820,12 @@ export type ProgressQueryResult = {
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
       };
+      media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       _type: 'image';
     };
-    category: {
+    category?: {
       _ref: string;
       _type: 'reference';
       _weak?: boolean;
@@ -818,15 +837,15 @@ export type ProgressQueryResult = {
       _createdAt: string;
       _updatedAt: string;
       _rev: string;
-      title: string;
+      title?: string;
       lessons: Array<{
         _id: string;
         _type: 'lesson';
         _createdAt: string;
         _updatedAt: string;
         _rev: string;
-        title: string;
-        slug: Slug;
+        title?: string;
+        slug?: Slug;
         description?: string;
         content?: Array<
           | ({
@@ -882,8 +901,8 @@ export type GetPostsByCategoryQueryResult = Array<{
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title: string;
-  slug: string;
+  title?: string;
+  slug: string | null;
   type?: 'article' | 'guide' | 'tutorial';
   description?: string;
   image?: {
@@ -893,6 +912,7 @@ export type GetPostsByCategoryQueryResult = Array<{
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     _type: 'image';
@@ -903,11 +923,16 @@ export type GetPostsByCategoryQueryResult = Array<{
     _createdAt: string;
     _updatedAt: string;
     _rev: string;
-    name: string;
-    slug: Slug;
-    icon?: string;
+    name?: string;
+    slug?: Slug;
+    icon?: {
+      library?: string;
+      name?: string;
+      color?: string;
+      colored?: boolean;
+    };
     description?: string;
-  };
+  } | null;
   content?: Array<
     | ({
         _key: string;
@@ -950,8 +975,8 @@ export type GetPostsByCategoryQueryResult = Array<{
     _rev: string;
     firstName?: string;
     lastName?: string;
-    email: string;
-    clerkId: string;
+    email?: string;
+    clerkId?: string;
     imageUrl?: string;
     role?: Array<string>;
   } | null;
@@ -966,8 +991,8 @@ export type GetPostBySlugQueryResult = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title: string;
-  slug: Slug;
+  title?: string;
+  slug?: Slug;
   type?: 'article' | 'guide' | 'tutorial';
   description?: string;
   image?: {
@@ -977,6 +1002,7 @@ export type GetPostBySlugQueryResult = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     _type: 'image';
@@ -987,11 +1013,16 @@ export type GetPostBySlugQueryResult = {
     _createdAt: string;
     _updatedAt: string;
     _rev: string;
-    name: string;
-    slug: Slug;
-    icon?: string;
+    name?: string;
+    slug?: Slug;
+    icon?: {
+      library?: string;
+      name?: string;
+      color?: string;
+      colored?: boolean;
+    };
     description?: string;
-  };
+  } | null;
   content?: Array<
     | ({
         _key: string;
@@ -1034,8 +1065,8 @@ export type GetPostBySlugQueryResult = {
     _rev: string;
     firstName?: string;
     lastName?: string;
-    email: string;
-    clerkId: string;
+    email?: string;
+    clerkId?: string;
     imageUrl?: string;
     role?: Array<string>;
   } | null;
@@ -1050,8 +1081,8 @@ export type GetPostsQueryResult = Array<{
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title: string;
-  slug: string;
+  title?: string;
+  slug: string | null;
   type?: 'article' | 'guide' | 'tutorial';
   description?: string;
   image?: {
@@ -1061,6 +1092,7 @@ export type GetPostsQueryResult = Array<{
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     _type: 'image';
@@ -1071,11 +1103,16 @@ export type GetPostsQueryResult = Array<{
     _createdAt: string;
     _updatedAt: string;
     _rev: string;
-    name: string;
-    slug: Slug;
-    icon?: string;
+    name?: string;
+    slug?: Slug;
+    icon?: {
+      library?: string;
+      name?: string;
+      color?: string;
+      colored?: boolean;
+    };
     description?: string;
-  };
+  } | null;
   content?: Array<
     | ({
         _key: string;
@@ -1118,8 +1155,8 @@ export type GetPostsQueryResult = Array<{
     _rev: string;
     firstName?: string;
     lastName?: string;
-    email: string;
-    clerkId: string;
+    email?: string;
+    clerkId?: string;
     imageUrl?: string;
     role?: Array<string>;
   } | null;
@@ -1134,8 +1171,8 @@ export type GetPostsByTypeQueryResult = Array<{
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title: string;
-  slug: string;
+  title?: string;
+  slug: string | null;
   type?: 'article' | 'guide' | 'tutorial';
   description?: string;
   image?: {
@@ -1145,6 +1182,7 @@ export type GetPostsByTypeQueryResult = Array<{
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     _type: 'image';
@@ -1155,11 +1193,16 @@ export type GetPostsByTypeQueryResult = Array<{
     _createdAt: string;
     _updatedAt: string;
     _rev: string;
-    name: string;
-    slug: Slug;
-    icon?: string;
+    name?: string;
+    slug?: Slug;
+    icon?: {
+      library?: string;
+      name?: string;
+      color?: string;
+      colored?: boolean;
+    };
     description?: string;
-  };
+  } | null;
   content?: Array<
     | ({
         _key: string;
@@ -1202,8 +1245,8 @@ export type GetPostsByTypeQueryResult = Array<{
     _rev: string;
     firstName?: string;
     lastName?: string;
-    email: string;
-    clerkId: string;
+    email?: string;
+    clerkId?: string;
     imageUrl?: string;
     role?: Array<string>;
   } | null;
@@ -1218,8 +1261,8 @@ export type SearchPostsQueryResult = Array<{
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title: string;
-  slug: string;
+  title?: string;
+  slug: string | null;
   type?: 'article' | 'guide' | 'tutorial';
   description?: string;
   image?: {
@@ -1229,6 +1272,7 @@ export type SearchPostsQueryResult = Array<{
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     _type: 'image';
@@ -1239,11 +1283,16 @@ export type SearchPostsQueryResult = Array<{
     _createdAt: string;
     _updatedAt: string;
     _rev: string;
-    name: string;
-    slug: Slug;
-    icon?: string;
+    name?: string;
+    slug?: Slug;
+    icon?: {
+      library?: string;
+      name?: string;
+      color?: string;
+      colored?: boolean;
+    };
     description?: string;
-  };
+  } | null;
   content?: Array<
     | ({
         _key: string;
@@ -1286,8 +1335,8 @@ export type SearchPostsQueryResult = Array<{
     _rev: string;
     firstName?: string;
     lastName?: string;
-    email: string;
-    clerkId: string;
+    email?: string;
+    clerkId?: string;
     imageUrl?: string;
     role?: Array<string>;
   } | null;
@@ -1303,7 +1352,7 @@ export type GetEnrolledTrainingsQueryResult = {
     _createdAt: string;
     _updatedAt: string;
     _rev: string;
-    student: {
+    student?: {
       _ref: string;
       _type: 'reference';
       _weak?: boolean;
@@ -1315,8 +1364,8 @@ export type GetEnrolledTrainingsQueryResult = {
       _createdAt: string;
       _updatedAt: string;
       _rev: string;
-      title: string;
-      slug: string;
+      title?: string;
+      slug: string | null;
       description?: string;
       image?: {
         asset?: {
@@ -1325,6 +1374,7 @@ export type GetEnrolledTrainingsQueryResult = {
           _weak?: boolean;
           [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
         };
+        media?: unknown;
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
         _type: 'image';
@@ -1335,11 +1385,16 @@ export type GetEnrolledTrainingsQueryResult = {
         _createdAt: string;
         _updatedAt: string;
         _rev: string;
-        name: string;
-        slug: Slug;
-        icon?: string;
+        name?: string;
+        slug?: Slug;
+        icon?: {
+          library?: string;
+          name?: string;
+          color?: string;
+          colored?: boolean;
+        };
         description?: string;
-      };
+      } | null;
       modules?: Array<{
         _ref: string;
         _type: 'reference';
@@ -1355,12 +1410,12 @@ export type GetEnrolledTrainingsQueryResult = {
         _rev: string;
         firstName?: string;
         lastName?: string;
-        email: string;
-        clerkId: string;
+        email?: string;
+        clerkId?: string;
         imageUrl?: string;
         role?: Array<string>;
       } | null;
-    };
+    } | null;
     enrolledAt?: string;
   }>;
 } | null;
@@ -1377,13 +1432,13 @@ export type EnrollmentQueryResult = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  student: {
+  student?: {
     _ref: string;
     _type: 'reference';
     _weak?: boolean;
     [internalGroqTypeReferenceTo]?: 'user';
   };
-  training: {
+  training?: {
     _ref: string;
     _type: 'reference';
     _weak?: boolean;
@@ -1401,8 +1456,8 @@ export type GetTrainingByIdQueryResult = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title: string;
-  slug: Slug;
+  title?: string;
+  slug?: Slug;
   description?: string;
   image?: {
     asset?: {
@@ -1411,6 +1466,7 @@ export type GetTrainingByIdQueryResult = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     _type: 'image';
@@ -1421,26 +1477,31 @@ export type GetTrainingByIdQueryResult = {
     _createdAt: string;
     _updatedAt: string;
     _rev: string;
-    name: string;
-    slug: Slug;
-    icon?: string;
+    name?: string;
+    slug?: Slug;
+    icon?: {
+      library?: string;
+      name?: string;
+      color?: string;
+      colored?: boolean;
+    };
     description?: string;
-  };
+  } | null;
   modules: Array<{
     _id: string;
     _type: 'module';
     _createdAt: string;
     _updatedAt: string;
     _rev: string;
-    title: string;
+    title?: string;
     lessons: Array<{
       _id: string;
       _type: 'lesson';
       _createdAt: string;
       _updatedAt: string;
       _rev: string;
-      title: string;
-      slug: Slug;
+      title?: string;
+      slug?: Slug;
       description?: string;
       content?: Array<
         | ({
@@ -1486,8 +1547,8 @@ export type GetTrainingByIdQueryResult = {
     _rev: string;
     firstName?: string;
     lastName?: string;
-    email: string;
-    clerkId: string;
+    email?: string;
+    clerkId?: string;
     imageUrl?: string;
     role?: Array<string>;
   } | null;
@@ -1502,8 +1563,8 @@ export type GetTrainingBySlugQueryResult = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title: string;
-  slug: Slug;
+  title?: string;
+  slug?: Slug;
   description?: string;
   image?: {
     asset?: {
@@ -1512,6 +1573,7 @@ export type GetTrainingBySlugQueryResult = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     _type: 'image';
@@ -1522,26 +1584,31 @@ export type GetTrainingBySlugQueryResult = {
     _createdAt: string;
     _updatedAt: string;
     _rev: string;
-    name: string;
-    slug: Slug;
-    icon?: string;
+    name?: string;
+    slug?: Slug;
+    icon?: {
+      library?: string;
+      name?: string;
+      color?: string;
+      colored?: boolean;
+    };
     description?: string;
-  };
+  } | null;
   modules: Array<{
     _id: string;
     _type: 'module';
     _createdAt: string;
     _updatedAt: string;
     _rev: string;
-    title: string;
+    title?: string;
     lessons: Array<{
       _id: string;
       _type: 'lesson';
       _createdAt: string;
       _updatedAt: string;
       _rev: string;
-      title: string;
-      slug: Slug;
+      title?: string;
+      slug?: Slug;
       description?: string;
       content?: Array<
         | ({
@@ -1587,8 +1654,8 @@ export type GetTrainingBySlugQueryResult = {
     _rev: string;
     firstName?: string;
     lastName?: string;
-    email: string;
-    clerkId: string;
+    email?: string;
+    clerkId?: string;
     imageUrl?: string;
     role?: Array<string>;
   } | null;
@@ -1603,8 +1670,8 @@ export type GetTrainingsQueryResult = Array<{
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title: string;
-  slug: string;
+  title?: string;
+  slug: string | null;
   description?: string;
   image?: {
     asset?: {
@@ -1613,6 +1680,7 @@ export type GetTrainingsQueryResult = Array<{
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     _type: 'image';
@@ -1623,11 +1691,16 @@ export type GetTrainingsQueryResult = Array<{
     _createdAt: string;
     _updatedAt: string;
     _rev: string;
-    name: string;
-    slug: Slug;
-    icon?: string;
+    name?: string;
+    slug?: Slug;
+    icon?: {
+      library?: string;
+      name?: string;
+      color?: string;
+      colored?: boolean;
+    };
     description?: string;
-  };
+  } | null;
   modules?: Array<{
     _ref: string;
     _type: 'reference';
@@ -1643,8 +1716,8 @@ export type GetTrainingsQueryResult = Array<{
     _rev: string;
     firstName?: string;
     lastName?: string;
-    email: string;
-    clerkId: string;
+    email?: string;
+    clerkId?: string;
     imageUrl?: string;
     role?: Array<string>;
   } | null;
@@ -1659,8 +1732,8 @@ export type SearchQueryResult = Array<{
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title: string;
-  slug: string;
+  title?: string;
+  slug: string | null;
   description?: string;
   image?: {
     asset?: {
@@ -1669,6 +1742,7 @@ export type SearchQueryResult = Array<{
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     _type: 'image';
@@ -1679,11 +1753,16 @@ export type SearchQueryResult = Array<{
     _createdAt: string;
     _updatedAt: string;
     _rev: string;
-    name: string;
-    slug: Slug;
-    icon?: string;
+    name?: string;
+    slug?: Slug;
+    icon?: {
+      library?: string;
+      name?: string;
+      color?: string;
+      colored?: boolean;
+    };
     description?: string;
-  };
+  } | null;
   modules?: Array<{
     _ref: string;
     _type: 'reference';
@@ -1699,8 +1778,8 @@ export type SearchQueryResult = Array<{
     _rev: string;
     firstName?: string;
     lastName?: string;
-    email: string;
-    clerkId: string;
+    email?: string;
+    clerkId?: string;
     imageUrl?: string;
     role?: Array<string>;
   } | null;
@@ -1717,8 +1796,8 @@ export type GetUserByClerkIdQueryResult = {
   _rev: string;
   firstName?: string;
   lastName?: string;
-  email: string;
-  clerkId: string;
+  email?: string;
+  clerkId?: string;
   imageUrl?: string;
   role?: Array<string>;
 } | null;

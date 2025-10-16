@@ -1,4 +1,5 @@
 import { defineField, defineType } from 'sanity';
+import IconPicker from '@/sanity/components/IconPicker';
 
 export const categoryType = defineType({
   name: 'category',
@@ -24,7 +25,14 @@ export const categoryType = defineType({
     defineField({
       name: 'icon',
       title: 'Icon',
-      type: 'string',
+      type: 'object',
+      fields: [
+        { name: 'library', type: 'string' },
+        { name: 'name', type: 'string' },
+        { name: 'color', type: 'string' },
+        { name: 'colored', type: 'boolean' },
+      ],
+      components: { input: IconPicker },
     }),
     defineField({
       name: 'description',

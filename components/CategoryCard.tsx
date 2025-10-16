@@ -3,6 +3,10 @@
 import Link from 'next/link';
 import { GetCategoriesQueryResult } from '@/sanity.types';
 import { PawPrint } from 'lucide-react';
+import * as SanityIcons from '@sanity/icons';
+import * as LucideIcons from 'lucide-react';
+import 'devicon/devicon.min.css';
+import React from 'react';
 
 interface CategoryCardProps {
   category: GetCategoriesQueryResult[number];
@@ -10,6 +14,47 @@ interface CategoryCardProps {
 }
 
 export function CategoryCard({ category, href }: CategoryCardProps) {
+  const renderIcon = () => {
+    const icon = category.icon;
+    if (!icon?.name || !icon?.library) return <PawPrint size={100} />;
+
+    switch (icon.library) {
+      case 'sanity': {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        const Icon = SanityIcons[icon.name];
+        return Icon ? (
+          <Icon fontSize={100} color={icon?.color || undefined} />
+        ) : (
+          <PawPrint size={100} />
+        );
+      }
+      case 'lucide': {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        const Icon = LucideIcons[icon.name];
+        return Icon ? (
+          <Icon size={100} color={icon?.color || undefined} />
+        ) : (
+          <PawPrint size={100} />
+        );
+      }
+      case 'devicon': {
+        return (
+          <span
+            className={`${icon.name}${icon?.colored ? ' colored' : ''}`}
+            style={{
+              fontSize: '100px',
+              color: icon?.colored ? undefined : icon?.color || undefined,
+            }}
+          />
+        );
+      }
+      default:
+        return <PawPrint size={100} />;
+    }
+  };
+
   return (
     <Link
       href={href}
@@ -18,7 +63,7 @@ export function CategoryCard({ category, href }: CategoryCardProps) {
       <div>
         <div className="relative h-52 w-full">
           <div className="h-full w-full flex items-center justify-center">
-            <PawPrint size={100} />
+            {renderIcon()}
           </div>
         </div>
 

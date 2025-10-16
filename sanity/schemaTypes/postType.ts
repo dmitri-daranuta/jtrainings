@@ -1,5 +1,5 @@
 import { defineField, defineType } from 'sanity';
-import { SelectorFieldInput } from '@/sanity/schemaTypes/components/SelectorFieldInput';
+import { SelectorFieldInput } from '@/sanity/components/SelectorFieldInput';
 import { BlockContentIcon } from '@sanity/icons';
 import { PresentationIcon, RocketIcon } from 'lucide-react';
 
