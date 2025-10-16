@@ -32,13 +32,12 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
     notFound();
   }
 
+  const category_name = posts[0]?.category?.name || '';
+  const category_description = posts[0]?.category?.description || '';
+
   return (
     <div className="min-h-screen bg-background">
-      <CategoryHero
-        title={posts[0].category.name}
-        description={posts[0].category.description}
-      />
-
+      <CategoryHero title={category_name} description={category_description} />
       {/* Posts Grid */}
       <div className="container mx-auto px-4">
         <Divider />
