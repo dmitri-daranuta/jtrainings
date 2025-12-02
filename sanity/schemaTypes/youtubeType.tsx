@@ -1,6 +1,6 @@
 import { defineField, defineType } from 'sanity';
 import { VideoIcon } from 'lucide-react';
-import ReactPlayer from 'react-player/youtube';
+import ReactPlayer from 'react-player';
 
 export const youtubeType = defineType({
   name: 'youtube',
@@ -15,7 +15,16 @@ export const youtubeType = defineType({
         return null;
       }
 
-      return <ReactPlayer url={title.toString()} />;
+      return (
+        <ReactPlayer
+          src={title.toString()}
+          style={{
+            width: '100%',
+            height: 'auto',
+            aspectRatio: '16/9',
+          }}
+        />
+      );
     },
   },
   fields: [
