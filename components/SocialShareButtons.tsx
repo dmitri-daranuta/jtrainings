@@ -1,9 +1,16 @@
 'use client';
 
 import Link from 'next/link';
+import { useState } from 'react';
 
 export default function SocialShareButtons({ title }: { title: string }) {
-  const url = window.location.href;
+  const [url] = useState(() =>
+    typeof window !== 'undefined' ? window.location.href : '',
+  );
+
+  if (!url) {
+    return null;
+  }
 
   return (
     <div className="sharing-buttons flex flex-wrap justify-center">

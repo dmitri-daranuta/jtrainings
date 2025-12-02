@@ -20,7 +20,6 @@ export function CategoryCard({ category, href }: CategoryCardProps) {
 
     switch (icon.library) {
       case 'sanity': {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         const Icon = SanityIcons[icon.name];
         return Icon ? (
@@ -30,7 +29,6 @@ export function CategoryCard({ category, href }: CategoryCardProps) {
         );
       }
       case 'lucide': {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         const Icon = LucideIcons[icon.name];
         return Icon ? (
