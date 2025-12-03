@@ -1,6 +1,5 @@
 import { client } from '../adminClient';
-import { sanityFetch } from '../live';
-import groq from 'groq';
+import { getUserByClerkId } from '@/sanity/lib/users/users';
 
 interface UncompleteLessonParams {
   lessonId: string;
@@ -12,18 +11,15 @@ export async function uncompleteLessonById({
   clerkId,
 }: UncompleteLessonParams) {
   // Get Sanity student ID from Clerk ID
-  const student = await sanityFetch({
-    query: groq`*[_type == "student" && clerkId == $clerkId][0]._id`,
-    params: { clerkId },
-  });
+  const student = await getUserByClerkId(clerkId);
 
-  if (!student.data) {
+  if (!student?._id) {
     throw new Error('Student not found');
   }
 
   // Find and delete the lesson completion record
   await client.delete({
     query: `*[_type == "lessonCompletion" && student._ref == $studentId && lesson._ref == $lessonId][0]`,
-    params: { studentId: student.data, lessonId },
+    params: { studentId: student._id, lessonId },
   });
 }
