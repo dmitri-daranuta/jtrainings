@@ -20,7 +20,7 @@ export function CategoryCard({ category, href }: CategoryCardProps) {
 
     switch (icon.library) {
       case 'sanity': {
-        // @ts-ignore
+        // @ts-expect-error skip.
         const Icon = SanityIcons[icon.name];
         return Icon ? (
           <Icon fontSize={100} color={icon?.color || undefined} />
@@ -29,7 +29,7 @@ export function CategoryCard({ category, href }: CategoryCardProps) {
         );
       }
       case 'lucide': {
-        // @ts-ignore
+        // @ts-expect-error skip.
         const Icon = LucideIcons[icon.name];
         return Icon ? (
           <Icon size={100} color={icon?.color || undefined} />
